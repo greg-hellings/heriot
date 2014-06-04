@@ -26,3 +26,6 @@ HEADERS  += browserwindow.h \
 
 FORMS    += browserwindow.ui \
     maintabswidget.ui
+
+OTHER_FILES += \
+    TODO.txt

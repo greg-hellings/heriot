@@ -1,0 +1,4 @@
+* Still need to work on opening a new tab based on control/middle-click, JavaScript magic, target=_blank, etc. but I am a step closer on that front as well not getting errors just warnings about popup blockers now.
+* Enable to-disk persistence for things like cookies, localStorage, etc.
+* Enable Forward/Back navigation buttons
+* Improve choices for locating WebInspector in-frame.
