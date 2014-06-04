@@ -20,7 +20,7 @@ public:
     explicit MainTabsWidget(QWidget *parent = 0);
     ~MainTabsWidget();
 
-    HeriotWebView* newTab(bool childOfActive = false);
+    HeriotWebView* newTab(bool childOfActive = false, bool displayNow = true);
     void setTabAddress(const QString& location);
 
 signals:
@@ -30,6 +30,7 @@ signals:
 private slots:
     void urlChanged(const QUrl& url);
     void titleChanged(const QString& title);
+    void tabChanged();
 
 private:
     Ui::MainTabs *ui;

@@ -23,6 +23,9 @@ public slots:
     void currentTabAddressChanged(const QString& address);
     // Needs a separate title because of changing titles without nav or while changing tabs
     void currentTabTitleChanged(const QString& title);
+    // User requested
+    void openNewTab();
+    void openNewChildTab();
 
 private:
     Ui::BrowserWindow *ui;

@@ -2,14 +2,14 @@
 
 #include <QTreeWidgetItem>
 
-OpenTab::OpenTab(QTreeWidget* parent, const QString& text, const HeriotWebView* view) :
+OpenTab::OpenTab(QTreeWidget* parent, const QString& text, HeriotWebView* view) :
     QTreeWidgetItem(parent, QStringList(text)),
     myWebView(view)
 {
     this->bind(view);
 }
 
-OpenTab::OpenTab(QTreeWidgetItem* parent, const QString& text, const HeriotWebView* view) :
+OpenTab::OpenTab(QTreeWidgetItem* parent, const QString& text, HeriotWebView* view) :
     QTreeWidgetItem(parent, QStringList(text)),
     myWebView(view)
 {
@@ -30,7 +30,7 @@ void OpenTab::on_View_LoadFinished(bool ok)
     }
 }
 
-const HeriotWebView* OpenTab::webView() const
+HeriotWebView* OpenTab::webView() const
 {
     return this->myWebView;
 }

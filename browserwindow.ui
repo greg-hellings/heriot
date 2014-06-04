@@ -70,6 +70,9 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionNew_Tab"/>
+    <addaction name="actionNew_Child_Tab"/>
+    <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuTools">
@@ -92,6 +95,22 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+J</string>
+   </property>
+  </action>
+  <action name="actionNew_Tab">
+   <property name="text">
+    <string>New Tab</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
+   </property>
+  </action>
+  <action name="actionNew_Child_Tab">
+   <property name="text">
+    <string>New Child Tab</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+T</string>
    </property>
   </action>
  </widget>

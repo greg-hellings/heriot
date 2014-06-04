@@ -12,10 +12,10 @@ class OpenTab : public QObject, public QTreeWidgetItem
 {
     Q_OBJECT
 public:
-    OpenTab(QTreeWidget* parent, const QString& text, const HeriotWebView* view);
-    OpenTab(QTreeWidgetItem* parent, const QString& text, const HeriotWebView* view);
+    OpenTab(QTreeWidget* parent, const QString& text, HeriotWebView* view);
+    OpenTab(QTreeWidgetItem* parent, const QString& text, HeriotWebView* view);
 
-    const HeriotWebView* webView() const;
+    HeriotWebView* webView() const;
 signals:
 
 public slots:
@@ -23,7 +23,7 @@ public slots:
 
 private:
     void bind(const HeriotWebView* view);
-    const HeriotWebView* myWebView;
+    HeriotWebView* myWebView;
 };
 
 #endif // OPENTAB_H
