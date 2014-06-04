@@ -17,6 +17,8 @@ BrowserWindow::BrowserWindow(QWidget *parent) :
     this->connect(this->mainTabsWidget, SIGNAL(tabAddressUpdated(QString)), SLOT(currentTabAddressChanged(QString)));
     this->connect(this->mainTabsWidget, SIGNAL(tabTitleUpdated(QString)), SLOT(currentTabTitleChanged(QString)));
 
+    // This only works in a global setting, but it speeds up browsing
+    QWebSettings::globalSettings()->setAttribute(QWebSettings::DnsPrefetchEnabled, true);
 }
 
 BrowserWindow::~BrowserWindow()
