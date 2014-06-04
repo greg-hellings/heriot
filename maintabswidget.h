@@ -10,6 +10,7 @@ class MainTabs;
 class OpenTab;
 class QWebView;
 class HeriotWebView;
+class QUrl;
 
 class MainTabsWidget : public QWidget
 {
@@ -24,9 +25,11 @@ public:
 
 signals:
     void tabAddressUpdated(const QString& address);
+    void tabTitleUpdated(const QString& title);
 
 private slots:
     void urlChanged(const QUrl& url);
+    void titleChanged(const QString& title);
 
 private:
     Ui::MainTabs *ui;

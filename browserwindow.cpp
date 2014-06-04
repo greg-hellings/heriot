@@ -15,6 +15,8 @@ BrowserWindow::BrowserWindow(QWidget *parent) :
 
     this->connect(this->ui->omniBox, SIGNAL(returnPressed()), SLOT(omniValueEntered()));
     this->connect(this->mainTabsWidget, SIGNAL(tabAddressUpdated(QString)), SLOT(currentTabAddressChanged(QString)));
+    this->connect(this->mainTabsWidget, SIGNAL(tabTitleUpdated(QString)), SLOT(currentTabTitleChanged(QString)));
+
 }
 
 BrowserWindow::~BrowserWindow()
@@ -30,4 +32,9 @@ void BrowserWindow::omniValueEntered()
 void BrowserWindow::currentTabAddressChanged(const QString &address)
 {
     this->ui->omniBox->setText(address);
+}
+
+void BrowserWindow::currentTabTitleChanged(const QString &title)
+{
+    this->setWindowTitle(title);
 }

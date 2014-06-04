@@ -51,13 +51,23 @@ void MainTabsWidget::setCurrentWindow(HeriotWebView *newCurrentWindow)
 {
     if (this->myCurrentWebView != NULL) {
         this->disconnect(this->myCurrentWebView, SIGNAL(urlChanged(QUrl)), this, SLOT(urlChanged(QUrl)));
+        this->disconnect(this->myCurrentWebView, SIGNAL(titleChanged(QString)), this, SLOT(titleChanged(QString)));
     }
 
     this->connect(newCurrentWindow, SIGNAL(urlChanged(QUrl)), this, SLOT(urlChanged(QUrl)));
+    this->connect(newCurrentWindow, SIGNAL(titleChanged(QString)), this, SLOT(titleChanged(QString)));
     this->myCurrentWebView = newCurrentWindow;
+
+    emit tabAddressUpdated(this->myCurrentWebView->url().toString());
+    emit tabTitleUpdated(this->myCurrentWebView->title());
 }
 
 void MainTabsWidget::urlChanged(const QUrl &url)
 {
     emit tabAddressUpdated(url.toString());
+}
+
+void MainTabsWidget::titleChanged(const QString &title)
+{
+    emit tabTitleUpdated(title);
 }
