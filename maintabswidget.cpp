@@ -75,8 +75,8 @@ void MainTabsWidget::setCurrentWindow(HeriotWebView *newCurrentWindow)
         this->disconnect(this->myCurrentWebView, SIGNAL(titleChanged(QString)), this, SLOT(titleChanged(QString)));
     }
 
-    this->connect(newCurrentWindow, SIGNAL(urlChanged(QUrl)), this, SLOT(urlChanged(QUrl)));
-    this->connect(newCurrentWindow, SIGNAL(titleChanged(QString)), this, SLOT(titleChanged(QString)));
+    this->connect(newCurrentWindow, SIGNAL(urlChanged(QUrl)), SLOT(urlChanged(QUrl)));
+    this->connect(newCurrentWindow, SIGNAL(titleChanged(QString)), SLOT(titleChanged(QString)));
     this->myCurrentWebView = newCurrentWindow;
 
     this->ui->webViews->setCurrentWidget(this->myCurrentWebView);
@@ -112,7 +112,7 @@ void MainTabsWidget::tabChanged()
     // selection at a later time, if deselection is possible
     if (tabs.count() == 1) {
         OpenTab* tab = dynamic_cast<OpenTab*>(tabs.at(0));
-        this->ui->webViews->setCurrentWidget(tab->webView());
+        this->setCurrentWindow(tab->webView());
         this->myOpenTab = tab;
     }
 }

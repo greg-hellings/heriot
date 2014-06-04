@@ -19,6 +19,7 @@ OpenTab::OpenTab(QTreeWidgetItem* parent, const QString& text, HeriotWebView* vi
 void OpenTab::bind(const HeriotWebView *view)
 {
     QObject::connect(dynamic_cast<const QObject*>(view), SIGNAL(loadFinished(bool)), dynamic_cast<const QObject*>(this), SLOT(on_View_LoadFinished(bool)));
+    this->connect(view, SIGNAL(titleChanged(QString)), SLOT(titleChanged(QString)));
 }
 
 void OpenTab::on_View_LoadFinished(bool ok)
@@ -33,4 +34,9 @@ void OpenTab::on_View_LoadFinished(bool ok)
 HeriotWebView* OpenTab::webView() const
 {
     return this->myWebView;
+}
+
+void OpenTab::titleChanged(const QString &title)
+{
+    this->setText(0, title);
 }
