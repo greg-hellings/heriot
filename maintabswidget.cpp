@@ -6,6 +6,7 @@
 
 #include <QItemSelectionModel>
 #include <QSizePolicy>
+#include <QWebHistory>
 
 MainTabsWidget::MainTabsWidget(QWidget *parent) :
     QWidget(parent),
@@ -82,6 +83,16 @@ void MainTabsWidget::setCurrentWindow(HeriotWebView *newCurrentWindow)
 
     emit tabAddressUpdated(this->myCurrentWebView->url().toString());
     emit tabTitleUpdated(this->myCurrentWebView->title());
+}
+
+void MainTabsWidget::navigatePaneBack()
+{
+    this->myCurrentWebView->page()->history()->back();
+}
+
+void MainTabsWidget::navigatePaneForward()
+{
+    this->myCurrentWebView->page()->history()->forward();
 }
 
 void MainTabsWidget::urlChanged(const QUrl &url)

@@ -21,29 +21,46 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
-    <property name="margin">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
      <number>0</number>
     </property>
     <item>
      <widget class="QWidget" name="widget" native="true">
       <layout class="QGridLayout" name="gridLayout">
-       <property name="margin">
+       <property name="leftMargin">
         <number>0</number>
        </property>
-       <item row="0" column="0">
-        <widget class="QToolButton" name="backButton">
-         <property name="text">
-          <string>Back</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="omniBox"/>
-       </item>
-       <item row="1" column="0" colspan="2">
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item row="1" column="0" colspan="3">
         <widget class="QFrame" name="mainTabsPlaceholder">
          <layout class="QGridLayout" name="gridLayout_2">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <item row="0" column="0">
@@ -51,6 +68,32 @@
           </item>
          </layout>
         </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QToolButton" name="forwardButton">
+         <property name="text">
+          <string>Forward</string>
+         </property>
+         <property name="arrowType">
+          <enum>Qt::RightArrow</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QToolButton" name="backButton">
+         <property name="text">
+          <string>Back</string>
+         </property>
+         <property name="shortcut">
+          <string>Ctrl+Left</string>
+         </property>
+         <property name="arrowType">
+          <enum>Qt::LeftArrow</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLineEdit" name="omniBox"/>
        </item>
       </layout>
      </widget>
@@ -63,7 +106,7 @@
      <x>0</x>
      <y>0</y>
      <width>1125</width>
-     <height>27</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -72,7 +115,9 @@
     </property>
     <addaction name="actionNew_Tab"/>
     <addaction name="actionNew_Child_Tab"/>
+    <addaction name="actionNew_Window"/>
     <addaction name="separator"/>
+    <addaction name="actionClose_Window"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuTools">
@@ -89,14 +134,6 @@
     <string>Exit</string>
    </property>
   </action>
-  <action name="actionOpenInspector">
-   <property name="text">
-    <string>Open Inspector</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+Shift+J</string>
-   </property>
-  </action>
   <action name="actionNew_Tab">
    <property name="text">
     <string>New Tab</string>
@@ -111,6 +148,19 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+T</string>
+   </property>
+  </action>
+  <action name="actionClose_Window">
+   <property name="text">
+    <string>Close Window</string>
+   </property>
+  </action>
+  <action name="actionNew_Window">
+   <property name="text">
+    <string>New Window</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
    </property>
   </action>
  </widget>

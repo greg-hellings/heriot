@@ -20,12 +20,16 @@ public:
 
 public slots:
     void omniValueEntered();
+    void backNavigation(bool);
+    void forwardNavigation(bool);
+    void quit();
     void currentTabAddressChanged(const QString& address);
     // Needs a separate title because of changing titles without nav or while changing tabs
     void currentTabTitleChanged(const QString& title);
     // User requested
     void openNewTab();
     void openNewChildTab();
+    void newWindow();
 
 private:
     Ui::BrowserWindow *ui;

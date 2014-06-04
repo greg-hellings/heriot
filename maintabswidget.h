@@ -9,6 +9,7 @@ class MainTabs;
 
 class OpenTab;
 class QWebView;
+class QWebHistoryItem;
 class HeriotWebView;
 class QUrl;
 
@@ -23,6 +24,8 @@ public:
     HeriotWebView* newTab(bool childOfActive = false, bool displayNow = true);
     void setTabAddress(const QString& location);
 
+    void navigatePaneBack();
+    void navigatePaneForward();
 signals:
     void tabAddressUpdated(const QString& address);
     void tabTitleUpdated(const QString& title);
