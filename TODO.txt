@@ -2,3 +2,5 @@
 * Enable to-disk persistence for things like cookies, localStorage, etc.
 * Enable Forward/Back navigation buttons
 * Improve choices for locating WebInspector in-frame.
+
+Default Icon from http://findicons.com/icon/32911/shield_security?id=33026 License: Freeware, Designer: Teekatas

@@ -21,6 +21,7 @@ signals:
 public slots:
     void on_View_LoadFinished(bool ok);
     void titleChanged(const QString& title);
+    void iconChanged();
 
 private:
     void bind(const HeriotWebView* view);

@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>heriot.ico</file>
+    </qresource>
+</RCC>

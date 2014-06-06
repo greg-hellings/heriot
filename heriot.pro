@@ -16,16 +16,21 @@ SOURCES += main.cpp\
         browserwindow.cpp \
     maintabswidget.cpp \
     heriotwebview.cpp \
-    opentab.cpp
+    opentab.cpp \
+    heriotapplication.cpp
 
 HEADERS  += browserwindow.h \
     tabrotatestyle.h \
     maintabswidget.h \
     heriotwebview.h \
-    opentab.h
+    opentab.h \
+    heriotapplication.h
 
 FORMS    += browserwindow.ui \
     maintabswidget.ui
 
 OTHER_FILES += \
     TODO.txt
+
+RESOURCES += \
+    data.qrc

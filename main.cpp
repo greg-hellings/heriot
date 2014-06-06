@@ -1,9 +1,10 @@
 #include "browserwindow.h"
 #include <QApplication>
+#include "heriotapplication.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    HeriotApplication a(argc, argv);
     BrowserWindow w;
     w.show();
 
