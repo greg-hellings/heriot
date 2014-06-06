@@ -50,7 +50,6 @@ HeriotWebView* MainTabsWidget::newTab(bool childOfCurrent, bool displayNow)
     settings->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, true);
     settings->setAttribute(QWebSettings::OfflineWebApplicationCacheEnabled, true);
     settings->setAttribute(QWebSettings::LocalStorageEnabled, true);
-    settings->enablePersistentStorage("~/.heriot");
 
     if (displayNow) {
         this->setCurrentWindow(webView);

@@ -24,6 +24,7 @@ void OpenTab::bind(const HeriotWebView *view)
     this->connect(view, SIGNAL(titleChanged(QString)), SLOT(titleChanged(QString)));
     this->connect(view, SIGNAL(iconChanged()), SLOT(iconChanged()));
     this->connect(view, SIGNAL(loadFinished(bool)), SLOT(iconChanged()));
+    this->connect(view, SIGNAL(loadStarted()), SLOT(iconChanged()));
 }
 
 void OpenTab::on_View_LoadFinished(bool ok)
