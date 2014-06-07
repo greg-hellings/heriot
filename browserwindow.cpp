@@ -1,6 +1,7 @@
 #include "browserwindow.h"
 #include "ui_browserwindow.h"
 #include "maintabswidget.h"
+#include "heriotapplication.h"
 
 #include <QWebView>
 #include <QTabWidget>
@@ -16,6 +17,8 @@ BrowserWindow::BrowserWindow(QWidget *parent) :
     this->connect(this->ui->omniBox, SIGNAL(returnPressed()), SLOT(omniValueEntered()));
     this->connect(this->mainTabsWidget, SIGNAL(tabAddressUpdated(QString)), SLOT(currentTabAddressChanged(QString)));
     this->connect(this->mainTabsWidget, SIGNAL(tabTitleUpdated(QString)), SLOT(currentTabTitleChanged(QString)));
+    this->connect(this->mainTabsWidget, SIGNAL(tabAddressUpdated(QString)), SLOT(iconChanged(QString)));
+    this->connect(this->mainTabsWidget, SIGNAL(iconChanged(QString)), SLOT(iconChanged(QString)));
 
     this->connect(this->ui->actionNew_Tab, SIGNAL(triggered()), SLOT(openNewTab()));
     this->connect(this->ui->actionNew_Child_Tab, SIGNAL(triggered()), SLOT(openNewChildTab()));
@@ -27,8 +30,7 @@ BrowserWindow::BrowserWindow(QWidget *parent) :
     this->connect(this->ui->actionClose_Window, SIGNAL(triggered()), SLOT(close()));
     this->connect(this->ui->actionNew_Window, SIGNAL(triggered()), SLOT(newWindow()));
 
-    // This only works in a global setting, but it speeds up browsing
-    QWebSettings::globalSettings()->setAttribute(QWebSettings::DnsPrefetchEnabled, true);
+    this->setIconSize(QSize(16, 16));
 }
 
 BrowserWindow::~BrowserWindow()
@@ -80,4 +82,11 @@ void BrowserWindow::newWindow()
 {
     BrowserWindow* window = new BrowserWindow();
     window->show();
+}
+
+void BrowserWindow::iconChanged(const QString &address)
+{
+    QUrl url(address);
+    QIcon icon = HeriotApplication::instance()->icon(url);
+    this->setWindowIcon(icon);
 }

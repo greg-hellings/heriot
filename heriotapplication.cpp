@@ -41,4 +41,5 @@ void HeriotApplication::postLaunch()
 
     QWebSettings::setIconDatabasePath(directory);
     QWebSettings::setOfflineStoragePath(directory);
+    QWebSettings::globalSettings()->setAttribute(QWebSettings::DnsPrefetchEnabled, true);
 }

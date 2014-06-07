@@ -12,6 +12,7 @@ class QWebView;
 class QWebHistoryItem;
 class HeriotWebView;
 class QUrl;
+class QTreeWidgetItem;
 
 class MainTabsWidget : public QWidget
 {
@@ -29,11 +30,14 @@ public:
 signals:
     void tabAddressUpdated(const QString& address);
     void tabTitleUpdated(const QString& title);
+    void iconChanged(const QString& address);
 
 private slots:
     void urlChanged(const QUrl& url);
     void titleChanged(const QString& title);
     void tabChanged();
+    void iconChanged();
+    void openNewTab(HeriotWebView* child, HeriotWebView* parent);
 
 private:
     Ui::MainTabs *ui;
@@ -41,6 +45,9 @@ private:
     OpenTab* myOpenTab;
 
     void setCurrentWindow(HeriotWebView* newCurrentWindow);
+    void configureNewTab(HeriotWebView* webView);
+    OpenTab* findTabByView(HeriotWebView* view);
+    OpenTab* findTabByViewRecursion(QTreeWidgetItem* item, HeriotWebView* view);
 };
 
 #endif // MAINTABS_H

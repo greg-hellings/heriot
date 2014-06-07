@@ -24,6 +24,7 @@ public slots:
     void forwardNavigation(bool);
     void quit();
     void currentTabAddressChanged(const QString& address);
+    void iconChanged(const QString& address);
     // Needs a separate title because of changing titles without nav or while changing tabs
     void currentTabTitleChanged(const QString& title);
     // User requested

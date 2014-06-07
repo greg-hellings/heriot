@@ -26,18 +26,9 @@ MainTabsWidget::~MainTabsWidget()
     delete ui;
 }
 
-HeriotWebView* MainTabsWidget::newTab(bool childOfCurrent, bool displayNow)
+void MainTabsWidget::configureNewTab(HeriotWebView* webView)
 {
-    HeriotWebView* webView = new HeriotWebView();
-    OpenTab *tab;
-    if (!childOfCurrent) {
-        tab = new OpenTab(this->ui->tabs, QString("Blank"), webView);
-    } else {
-        tab = new OpenTab(this->myOpenTab, QString("Blank"), webView);
-    }
-    // Auto-select tab on creation
-    this->ui->tabs->clearSelection();
-    tab->setSelected(true);
+    this->connect(webView, SIGNAL(openNewTab(HeriotWebView*, HeriotWebView*)), SLOT(openNewTab(HeriotWebView*, HeriotWebView*)));
 
     this->ui->webViews->addWidget(webView);
 
@@ -50,9 +41,24 @@ HeriotWebView* MainTabsWidget::newTab(bool childOfCurrent, bool displayNow)
     settings->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, true);
     settings->setAttribute(QWebSettings::OfflineWebApplicationCacheEnabled, true);
     settings->setAttribute(QWebSettings::LocalStorageEnabled, true);
+}
+
+HeriotWebView* MainTabsWidget::newTab(bool childOfCurrent, bool displayNow)
+{
+    HeriotWebView* webView = new HeriotWebView();
+    OpenTab *tab;
+    if (!childOfCurrent) {
+        tab = new OpenTab(this->ui->tabs, QString("Blank"), webView);
+    } else {
+        tab = new OpenTab(this->myOpenTab, QString("Blank"), webView);
+    }
+    this->configureNewTab(webView);
 
     if (displayNow) {
         this->setCurrentWindow(webView);
+        // Auto-select tab on creation
+        this->ui->tabs->clearSelection();
+        tab->setSelected(true);
     }
 
     return webView;
@@ -72,16 +78,21 @@ void MainTabsWidget::setCurrentWindow(HeriotWebView *newCurrentWindow)
     if (this->myCurrentWebView != NULL) {
         this->disconnect(this->myCurrentWebView, SIGNAL(urlChanged(QUrl)), this, SLOT(urlChanged(QUrl)));
         this->disconnect(this->myCurrentWebView, SIGNAL(titleChanged(QString)), this, SLOT(titleChanged(QString)));
+        this->disconnect(this->myCurrentWebView, SIGNAL(iconChanged()), this, SLOT(iconChanged()));
+        this->disconnect(this->myCurrentWebView, SIGNAL(urlChanged(QUrl)), this, SLOT(iconChanged()));
     }
 
     this->connect(newCurrentWindow, SIGNAL(urlChanged(QUrl)), SLOT(urlChanged(QUrl)));
     this->connect(newCurrentWindow, SIGNAL(titleChanged(QString)), SLOT(titleChanged(QString)));
+    this->connect(newCurrentWindow, SIGNAL(iconChanged()), SLOT(iconChanged()));
+    this->connect(newCurrentWindow, SIGNAL(urlChanged(QUrl)), SLOT(iconChanged()));
     this->myCurrentWebView = newCurrentWindow;
 
     this->ui->webViews->setCurrentWidget(this->myCurrentWebView);
 
     emit tabAddressUpdated(this->myCurrentWebView->url().toString());
     emit tabTitleUpdated(this->myCurrentWebView->title());
+    emit iconChanged(this->myCurrentWebView->url().toString());
 }
 
 void MainTabsWidget::navigatePaneBack()
@@ -114,4 +125,39 @@ void MainTabsWidget::tabChanged()
         this->setCurrentWindow(tab->webView());
         this->myOpenTab = tab;
     }
+}
+
+void MainTabsWidget::iconChanged()
+{
+    emit iconChanged(this->myCurrentWebView->url().toString());
+}
+
+void MainTabsWidget::openNewTab(HeriotWebView *child, HeriotWebView* parent)
+{
+    OpenTab* parentTab = this->findTabByView(parent);
+    OpenTab* tab = new OpenTab(parentTab, child->title(), child);
+    this->configureNewTab(child);
+}
+
+OpenTab* MainTabsWidget::findTabByView(HeriotWebView *view)
+{
+    QTreeWidgetItem* item = this->ui->tabs->invisibleRootItem();
+    return this->findTabByViewRecursion(item, view);
+}
+
+OpenTab* MainTabsWidget::findTabByViewRecursion(QTreeWidgetItem* item, HeriotWebView* view)
+{
+    bool found = false;
+    for (int i = 0; i < item->childCount() && !found; ++i) {
+        OpenTab* tab = dynamic_cast<OpenTab*>(item->child(i));
+        if (tab->webView() == view) {
+            return tab;
+        }
+        tab = this->findTabByViewRecursion(tab, view);
+        if (tab != NULL) {
+            return tab;
+        }
+    }
+
+    return NULL;
 }

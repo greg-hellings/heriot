@@ -9,7 +9,11 @@ class HeriotWebView : public QWebView
 public:
     explicit HeriotWebView(QWidget *parent = 0);
 
+protected:
+    QWebView* createWindow(QWebPage::WebWindowType type);
+
 signals:
+    void openNewTab(HeriotWebView* child, HeriotWebView* parent);
 
 public slots:
 
