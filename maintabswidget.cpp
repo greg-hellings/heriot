@@ -51,6 +51,7 @@ HeriotWebView* MainTabsWidget::newTab(bool childOfCurrent, bool displayNow)
         tab = new OpenTab(this->ui->tabs, QString("Blank"), webView);
     } else {
         tab = new OpenTab(this->myOpenTab, QString("Blank"), webView);
+        this->myOpenTab->setExpanded(true);
     }
     this->configureNewTab(webView);
 
@@ -137,6 +138,7 @@ void MainTabsWidget::openNewTab(HeriotWebView *child, HeriotWebView* parent)
     OpenTab* parentTab = this->findTabByView(parent);
     OpenTab* tab = new OpenTab(parentTab, child->title(), child);
     this->configureNewTab(child);
+    parentTab->setExpanded(true);
 }
 
 OpenTab* MainTabsWidget::findTabByView(HeriotWebView *view)
