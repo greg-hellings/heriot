@@ -23,8 +23,34 @@
       <number>4</number>
      </property>
      <widget class="QTreeWidget" name="tabs">
+      <property name="styleSheet">
+       <string notr="true">QTreeeView {
+	show-decoration-selected: 0;
+	background-color: #a3a3a3;
+}
+
+QTreeView::item {
+	border: 1px solid #777777;
+	border-right-color: transparent;
+	border-top-left-radius: 7px;
+	border-bottom-left-radius: 7px;
+	background-color: #d3d3d3;
+    color: #000;
+	margin-bottom: 1px;
+	font-weight: bold;
+}
+
+QTreeView::item:selected {
+	background-color: #b3b3b3;
+	border-color: #333333;
+	border-color-right: transparent;
+}</string>
+      </property>
       <property name="editTriggers">
        <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="indentation">
+       <number>15</number>
       </property>
       <property name="allColumnsShowFocus">
        <bool>true</bool>
