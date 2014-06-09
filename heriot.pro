@@ -17,14 +17,16 @@ SOURCES += main.cpp\
     maintabswidget.cpp \
     heriotwebview.cpp \
     opentab.cpp \
-    heriotapplication.cpp
+    heriotapplication.cpp \
+    heriotwebpage.cpp
 
 HEADERS  += browserwindow.h \
     tabrotatestyle.h \
     maintabswidget.h \
     heriotwebview.h \
     opentab.h \
-    heriotapplication.h
+    heriotapplication.h \
+    heriotwebpage.h
 
 FORMS    += browserwindow.ui \
     maintabswidget.ui

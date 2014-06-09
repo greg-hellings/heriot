@@ -30,7 +30,7 @@
        <string notr="true">QTreeView {
 	background-color: #dfdfdf;
 	alternate-background-color: #dfdfdf;
-	show-decoration-selected: 1;
+	show-decoration-selected: 0;
 }
 
 QTreeView::item {

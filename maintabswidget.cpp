@@ -47,7 +47,7 @@ void MainTabsWidget::configureNewTab(HeriotWebView* webView)
 
 HeriotWebView* MainTabsWidget::newTab(bool childOfCurrent, bool displayNow)
 {
-    HeriotWebView* webView = new HeriotWebView();
+    HeriotWebView* webView = new HeriotWebView(this);
     OpenTab *tab;
     if (!childOfCurrent) {
         tab = new OpenTab(this->ui->tabs, QString("Blank"), webView);

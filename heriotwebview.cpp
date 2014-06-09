@@ -1,8 +1,14 @@
 #include "heriotwebview.h"
 
+#include <QMouseEvent>
+
+#include "heriotwebpage.h"
+
 HeriotWebView::HeriotWebView(QWidget *parent) :
     QWebView(parent)
 {
+    this->myPage = new HeriotWebPage(this);
+    this->setPage(this->myPage);
 }
 
 QWebView* HeriotWebView::createWindow(QWebPage::WebWindowType type)
@@ -14,4 +20,11 @@ QWebView* HeriotWebView::createWindow(QWebPage::WebWindowType type)
     } else {
         return QWebView::createWindow(type);
     }
+}
+
+void HeriotWebView::mousePressEvent(QMouseEvent *event)
+{
+    this->myPage->m_keyboardModifiers = event->modifiers();
+    this->myPage->m_pressedButtons    = event->buttons();
+    QWebView::mousePressEvent(event);
 }
