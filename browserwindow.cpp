@@ -5,6 +5,7 @@
 
 #include <QWebView>
 #include <QTabWidget>
+#include <QKeyEvent>
 
 BrowserWindow::BrowserWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -30,12 +31,33 @@ BrowserWindow::BrowserWindow(QWidget *parent) :
     this->connect(this->ui->actionClose_Window, SIGNAL(triggered()), SLOT(close()));
     this->connect(this->ui->actionNew_Window, SIGNAL(triggered()), SLOT(newWindow()));
 
+    this->connect(this->ui->actionClose_Tab, SIGNAL(triggered()), SLOT(onCloseCurrentTab()));
+
     this->setIconSize(QSize(16, 16));
 }
 
 BrowserWindow::~BrowserWindow()
 {
     delete ui;
+}
+
+void BrowserWindow::keyPressEvent(QKeyEvent *event)
+{
+    switch(event->key()) {
+    case Qt::Key_L:
+        if (event->modifiers() & Qt::ControlModifier) {
+            this->ui->omniBox->setFocus();
+        }
+        event->ignore();
+        break;
+    default:
+        QMainWindow::keyPressEvent(event);
+    }
+}
+
+void BrowserWindow::onCloseCurrentTab()
+{
+    this->mainTabsWidget->closeCurrentTab();
 }
 
 void BrowserWindow::omniValueEntered()

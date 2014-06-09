@@ -28,6 +28,24 @@ MainTabsWidget::~MainTabsWidget()
     delete ui;
 }
 
+void MainTabsWidget::closeCurrentTab()
+{
+    // Remove the webview from the stack
+    this->ui->webViews->removeWidget(this->myOpenTab->webView());
+    // Promote first child to parent if one exists
+    QTreeWidgetItem* newCurrent = this->myOpenTab->removeSelf();
+    // And of course we must be sure to always have some sort of tab
+    if (newCurrent == NULL && this->ui->tabs->invisibleRootItem()->childCount() == 0) {
+        this->setCurrentWindow(this->newTab(false));
+    } else if (newCurrent == NULL) {
+        // nop
+    } else {
+        this->myOpenTab = dynamic_cast<OpenTab*>(newCurrent);
+        this->ui->tabs->clearSelection();
+        this->myOpenTab->setSelected(true);
+    }
+}
+
 void MainTabsWidget::configureNewTab(HeriotWebView* webView)
 {
     this->connect(webView, SIGNAL(openNewTab(HeriotWebView*, HeriotWebView*)), SLOT(openNewTab(HeriotWebView*, HeriotWebView*)));

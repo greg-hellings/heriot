@@ -18,6 +18,9 @@ public:
     explicit BrowserWindow(QWidget *parent = 0);
     ~BrowserWindow();
 
+protected:
+    void keyPressEvent(QKeyEvent *);
+
 public slots:
     void omniValueEntered();
     void backNavigation(bool);
@@ -31,6 +34,7 @@ public slots:
     void openNewTab();
     void openNewChildTab();
     void newWindow();
+    void onCloseCurrentTab();
 
 private:
     Ui::BrowserWindow *ui;

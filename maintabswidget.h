@@ -27,6 +27,9 @@ public:
 
     void navigatePaneBack();
     void navigatePaneForward();
+
+    void closeCurrentTab();
+
 signals:
     void tabAddressUpdated(const QString& address);
     void tabTitleUpdated(const QString& title);

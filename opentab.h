@@ -16,6 +16,9 @@ public:
     OpenTab(QTreeWidgetItem* parent, const QString& text, HeriotWebView* view);
 
     HeriotWebView* webView() const;
+    OpenTab* removeSelf();
+
+    OpenTab* closestSibling(QTreeWidgetItem* closestRelative);
 signals:
 
 public slots:
