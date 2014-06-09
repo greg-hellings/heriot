@@ -39,7 +39,8 @@ void HeriotApplication::postLaunch()
         dir.mkpath(".");
     }
 
-    QWebSettings::setIconDatabasePath(directory);
-    QWebSettings::setOfflineStoragePath(directory);
-    QWebSettings::globalSettings()->setAttribute(QWebSettings::DnsPrefetchEnabled, true);
+    QWebSettings::enablePersistentStorage(directory);
+    QWebSettings* settings = QWebSettings::globalSettings();
+    settings->setAttribute(QWebSettings::DnsPrefetchEnabled, true);
+    settings->setThirdPartyCookiePolicy(QWebSettings::AllowThirdPartyWithExistingCookies);
 }
