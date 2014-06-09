@@ -23,10 +23,14 @@
       <number>4</number>
      </property>
      <widget class="QTreeWidget" name="tabs">
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
       <property name="styleSheet">
-       <string notr="true">QTreeeView {
-	show-decoration-selected: 0;
-	background-color: #a3a3a3;
+       <string notr="true">QTreeView {
+	background-color: #dfdfdf;
+	alternate-background-color: #dfdfdf;
+	show-decoration-selected: 1;
 }
 
 QTreeView::item {
@@ -42,15 +46,27 @@ QTreeView::item {
 
 QTreeView::item:selected {
 	background-color: #b3b3b3;
-	border-color: #333333;
+	border-color: #303030;
 	border-color-right: transparent;
 }</string>
       </property>
       <property name="editTriggers">
        <set>QAbstractItemView::NoEditTriggers</set>
       </property>
+      <property name="dragEnabled">
+       <bool>false</bool>
+      </property>
+      <property name="dragDropMode">
+       <enum>QAbstractItemView::InternalMove</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectItems</enum>
+      </property>
       <property name="indentation">
        <number>15</number>
+      </property>
+      <property name="sortingEnabled">
+       <bool>false</bool>
       </property>
       <property name="allColumnsShowFocus">
        <bool>true</bool>

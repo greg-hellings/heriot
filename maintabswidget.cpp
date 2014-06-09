@@ -19,6 +19,8 @@ MainTabsWidget::MainTabsWidget(QWidget *parent) :
 
     this->setCurrentWindow(this->newTab(false));
     this->setTabAddress("http://www.google.com");
+
+    this->ui->tabs->setFocusPolicy(Qt::NoFocus);
 }
 
 MainTabsWidget::~MainTabsWidget()
