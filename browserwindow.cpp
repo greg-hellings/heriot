@@ -56,11 +56,13 @@ void BrowserWindow::currentTabTitleChanged(const QString &title)
 void BrowserWindow::openNewTab()
 {
     this->mainTabsWidget->newTab(false);
+    this->ui->omniBox->setFocus();
 }
 
 void BrowserWindow::openNewChildTab()
 {
     this->mainTabsWidget->newTab(true);
+    this->ui->omniBox->setFocus();
 }
 
 void BrowserWindow::backNavigation(bool)
