@@ -47,7 +47,7 @@ QTreeView::item {
 QTreeView::item:selected {
 	background-color: #b3b3b3;
 	border-color: #303030;
-	border-color-right: transparent;
+	border-right-color: transparent;
 }</string>
       </property>
       <property name="editTriggers">
