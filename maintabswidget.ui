@@ -6,23 +6,38 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>575</width>
-    <height>454</height>
+    <width>674</width>
+    <height>468</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item>
     <widget class="QSplitter" name="splitter">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <property name="handleWidth">
-      <number>4</number>
-     </property>
      <widget class="QTreeWidget" name="tabs">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>200</width>
+        <height>450</height>
+       </size>
+      </property>
       <property name="autoFillBackground">
        <bool>false</bool>
       </property>
@@ -83,8 +98,8 @@ QTreeView::item:selected {
      <widget class="QStackedWidget" name="webViews">
       <property name="minimumSize">
        <size>
-        <width>300</width>
-        <height>0</height>
+        <width>450</width>
+        <height>450</height>
        </size>
       </property>
      </widget>

@@ -55,7 +55,6 @@ void MainTabsWidget::configureNewTab(HeriotWebView* webView)
     // Some default settings to enable - doing it here, rather than in global in case we
     // want to allow different options per-tab or per-view in the future
     QWebSettings* settings = webView->page()->settings();
-    settings->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
     settings->setAttribute(QWebSettings::PluginsEnabled, true);
     settings->setAttribute(QWebSettings::JavascriptCanOpenWindows, true);
     settings->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, true);
