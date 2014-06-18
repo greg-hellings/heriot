@@ -12,23 +12,19 @@ class OpenTab : public QObject, public QTreeWidgetItem
 {
     Q_OBJECT
 public:
-    OpenTab(QTreeWidget* parent, const QString& text, HeriotWebView* view);
-    OpenTab(QTreeWidgetItem* parent, const QString& text, HeriotWebView* view);
+    OpenTab(QTreeWidget* parent, const QString& text, QWidget* view);
+    OpenTab(QTreeWidgetItem* parent, const QString& text, QWidget* view);
 
-    HeriotWebView* webView() const;
+    QWidget* widget() const;
     OpenTab* removeSelf();
 
     OpenTab* closestSibling(QTreeWidgetItem* closestRelative);
 signals:
 
 public slots:
-    void on_View_LoadFinished(bool ok);
-    void titleChanged(const QString& title);
-    void iconChanged();
 
 private:
-    void bind(const HeriotWebView* view);
-    HeriotWebView* myWebView;
+    QWidget* myWidget;
 };
 
 #endif // OPENTAB_H

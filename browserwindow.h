@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QVector>
 
-class MainTabsWidget;
+class SideTabs;
 
 namespace Ui {
 class BrowserWindow;
@@ -38,7 +38,7 @@ public slots:
 
 private:
     Ui::BrowserWindow *ui;
-    MainTabsWidget* mainTabsWidget;
+    SideTabs* mainTabsWidget;
 };
 
 #endif // BROWSERWINDOW_H

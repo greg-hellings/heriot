@@ -14,22 +14,26 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         browserwindow.cpp \
-    maintabswidget.cpp \
     heriotwebview.cpp \
     opentab.cpp \
     heriotapplication.cpp \
-    heriotwebpage.cpp
+    heriotwebpage.cpp \
+    sidetabs.cpp \
+    browsertab.cpp \
+    maintabwidget.cpp
 
 HEADERS  += browserwindow.h \
     tabrotatestyle.h \
-    maintabswidget.h \
     heriotwebview.h \
     opentab.h \
     heriotapplication.h \
-    heriotwebpage.h
+    heriotwebpage.h \
+    sidetabs.h \
+    browsertab.h \
+    maintabwidget.h
 
 FORMS    += browserwindow.ui \
-    maintabswidget.ui
+    sidetabs.ui
 
 OTHER_FILES += \
     TODO.txt

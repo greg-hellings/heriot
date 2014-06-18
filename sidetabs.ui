@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainTabs</class>
- <widget class="QWidget" name="MainTabs">
+ <class>SideTabs</class>
+ <widget class="QWidget" name="SideTabs">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -95,7 +95,7 @@ QTreeView::item:selected {
        </property>
       </column>
      </widget>
-     <widget class="QStackedWidget" name="webViews">
+     <widget class="QStackedWidget" name="widgets">
       <property name="minimumSize">
        <size>
         <width>450</width>
