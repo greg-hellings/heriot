@@ -12,7 +12,7 @@ MainTabWidget::MainTabWidget(QWidget *parent) :
     OpenTab* first = this->newTab(new HeriotWebView(), false, true);
     this->setTabAddress("http://www.google.com");
     this->connect(this, SIGNAL(tabChanged(OpenTab*,OpenTab*)), SLOT(tabChanged(OpenTab*,OpenTab*)));
-    this->tabChanged(first, NULL);
+    this->tabChanged(NULL, first);
 }
 
 void MainTabWidget::configureNewTab(OpenTab *newTab)
@@ -45,7 +45,7 @@ HeriotWebView* MainTabWidget::currentWebView()
     return dynamic_cast<HeriotWebView*>(this->currentTab()->widget());
 }
 
-void MainTabWidget::tabChanged(OpenTab* newTab, OpenTab* oldTab)
+void MainTabWidget::tabChanged(OpenTab* oldTab, OpenTab* newTab)
 {
     HeriotWebView* webView = dynamic_cast<HeriotWebView*>(newTab->widget());
     HeriotWebView* current = NULL;
