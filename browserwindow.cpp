@@ -84,7 +84,7 @@ void BrowserWindow::openNewTab()
 
 void BrowserWindow::openNewChildTab()
 {
-    this->mainTabsWidget->newTab(new HeriotWebView(this->mainTabsWidget));
+    this->mainTabsWidget->newTab(new HeriotWebView(this->mainTabsWidget), true);
     this->ui->omniBox->setFocus();
 }
 
