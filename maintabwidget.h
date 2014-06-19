@@ -25,6 +25,7 @@ public slots:
     void iconChanged();
     void openNewTab(HeriotWebView *child, HeriotWebView* parent);
     void tabChanged(OpenTab* newTab, OpenTab* oldTab);
+    void tabClosing(int remainingTabs);
 
 private:
     HeriotWebView* currentWebView();

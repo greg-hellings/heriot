@@ -12,6 +12,7 @@ MainTabWidget::MainTabWidget(QWidget *parent) :
     OpenTab* first = this->newTab(new HeriotWebView(), false, true);
     this->setTabAddress("http://www.google.com");
     this->connect(this, SIGNAL(tabChanged(OpenTab*,OpenTab*)), SLOT(tabChanged(OpenTab*,OpenTab*)));
+    this->connect(this, SIGNAL(closedTab(int)), SLOT(tabClosing(int)));
     this->tabChanged(NULL, first);
 }
 
@@ -113,4 +114,10 @@ void MainTabWidget::openNewTab(HeriotWebView *child, HeriotWebView* parent)
     OpenTab* parentTab = this->findTabByWidget(parent);
     this->newTab(child, parent, true);
     parentTab->setExpanded(true);
+}
+
+void MainTabWidget::tabClosing(int remainingTabs)
+{
+    if (remainingTabs == 0)
+        this->setCurrentTab(this->newTab(new HeriotWebView(this)));
 }

@@ -27,6 +27,7 @@ public:
     void setCurrentTab(OpenTab* tab);
 signals:
     void tabChanged(OpenTab* oldTab, OpenTab* newTab);
+    void closedTab(int topLevelTabsRemaining);
 
 private slots:
     void tabChanged();
