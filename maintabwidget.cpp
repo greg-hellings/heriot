@@ -5,6 +5,7 @@
 #include "heriotwebview.h"
 #include "opentab.h"
 #include "browsertab.h"
+#include "webviewwrapper.h"
 
 MainTabWidget::MainTabWidget(QWidget *parent) :
     SideTabs(parent)
@@ -19,7 +20,8 @@ MainTabWidget::MainTabWidget(QWidget *parent) :
 void MainTabWidget::configureNewTab(OpenTab *newTab)
 {
     SideTabs::configureNewTab(newTab);
-    HeriotWebView* webView = dynamic_cast<HeriotWebView*>(newTab->widget());
+    BrowserTab* newBrowserTab = dynamic_cast<BrowserTab*>(newTab);
+    HeriotWebView* webView = newBrowserTab->webView();
 
     this->connect(webView, SIGNAL(openNewTab(HeriotWebView*, HeriotWebView*)), SLOT(openNewTab(HeriotWebView*, HeriotWebView*)));
     // Some default settings to enable - doing it here, rather than in global in case we
@@ -43,7 +45,7 @@ void MainTabWidget::setTabAddress(const QString& place)
 
 HeriotWebView* MainTabWidget::currentWebView()
 {
-    return dynamic_cast<HeriotWebView*>(this->currentTab()->widget());
+    return (dynamic_cast<BrowserTab*>(this->currentTab()))->webView();
 }
 
 void MainTabWidget::tabChanged(OpenTab* oldTab, OpenTab* newTab)
@@ -60,7 +62,6 @@ void MainTabWidget::tabChanged(OpenTab* oldTab, OpenTab* newTab)
         this->disconnect(current, SIGNAL(titleChanged(QString)), this, SLOT(titleChanged(QString)));
         this->disconnect(current, SIGNAL(iconChanged()), this, SLOT(iconChanged()));
         this->disconnect(current, SIGNAL(urlChanged(QUrl)), this, SLOT(iconChanged()));
-        this->disconnect(current, SIGNAL(createInspector(QWebInspector*)), this, SIGNAL(createInspector(QWebInspector*)));
     }
 
     if (webView != NULL) {
@@ -68,7 +69,6 @@ void MainTabWidget::tabChanged(OpenTab* oldTab, OpenTab* newTab)
         this->connect(webView, SIGNAL(titleChanged(QString)), SLOT(titleChanged(QString)));
         this->connect(webView, SIGNAL(iconChanged()), SLOT(iconChanged()));
         this->connect(webView, SIGNAL(urlChanged(QUrl)), SLOT(iconChanged()));
-        this->connect(webView, SIGNAL(createInspector(QWebInspector*)), SIGNAL(createInspector(QWebInspector*)));
 
         this->titleChanged(webView->title());
         this->urlChanged(webView->url());
@@ -78,12 +78,16 @@ void MainTabWidget::tabChanged(OpenTab* oldTab, OpenTab* newTab)
 
 OpenTab* MainTabWidget::getNewOpenTab(QWidget *content, QTreeWidgetItem *parent)
 {
-    return new BrowserTab(parent, QString(""), dynamic_cast<HeriotWebView*>(content));
+    WebViewWrapper* wrapper = new WebViewWrapper();
+    wrapper->addWebView(dynamic_cast<HeriotWebView*>(content));
+    return new BrowserTab(parent, QString(""), wrapper);
 }
 
 OpenTab* MainTabWidget::getNewOpenTab(QWidget *content, QTreeWidget *parent)
 {
-    return new BrowserTab(parent, QString(""), dynamic_cast<HeriotWebView*>(content));
+    WebViewWrapper* wrapper = new WebViewWrapper();
+    wrapper->addWebView(dynamic_cast<HeriotWebView*>(content));
+    return new BrowserTab(parent, QString(""), wrapper);
 }
 
 void MainTabWidget::navigatePaneBack()

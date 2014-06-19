@@ -19,7 +19,6 @@ signals:
     void tabAddressUpdated(const QString& address);
     void tabTitleUpdated(const QString& title);
     void iconChanged(const QString& address);
-    void createInspector(QWebInspector* inspector);
 
 public slots:
     void urlChanged(const QUrl& url);
@@ -28,7 +27,6 @@ public slots:
     void openNewTab(HeriotWebView *child, HeriotWebView* parent);
     void tabChanged(OpenTab* newTab, OpenTab* oldTab);
     void tabClosing(int remainingTabs);
-    void createInspector(QWebInspector *inspector);
 
 private:
     HeriotWebView* currentWebView();

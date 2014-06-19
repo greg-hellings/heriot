@@ -1,19 +1,20 @@
 #include "browsertab.h"
 #include "heriotwebview.h"
 #include "heriotapplication.h"
+#include "webviewwrapper.h"
 
 #include <QTreeWidgetItem>
 
-BrowserTab::BrowserTab(QTreeWidget* parent, const QString& text, HeriotWebView* view) :
+BrowserTab::BrowserTab(QTreeWidget* parent, const QString& text, WebViewWrapper* view) :
     OpenTab(parent, text, view)
 {
-    this->bind(view);
+    this->bind(view->webView());
 }
 
-BrowserTab::BrowserTab(QTreeWidgetItem *parent, const QString &text, HeriotWebView *view) :
+BrowserTab::BrowserTab(QTreeWidgetItem *parent, const QString &text, WebViewWrapper* view) :
     OpenTab(parent, text, view)
 {
-    this->bind(view);
+    this->bind(view->webView());
 }
 
 void BrowserTab::bind(const HeriotWebView *view)
@@ -36,7 +37,7 @@ void BrowserTab::loadFinished(bool ok)
 
 HeriotWebView* BrowserTab::webView() const
 {
-    return dynamic_cast<HeriotWebView*>(this->widget());
+    return (dynamic_cast<WebViewWrapper*>(this->widget()))->webView();
 }
 
 void BrowserTab::titleChanged(const QString &title)

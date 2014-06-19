@@ -17,6 +17,11 @@ HeriotWebView::HeriotWebView(QWidget *parent) :
     this->myInspector->setPage(this->myPage);
 }
 
+QWebInspector* HeriotWebView::webInspector() const
+{
+    return this->myInspector;
+}
+
 QWebView* HeriotWebView::createWindow(QWebPage::WebWindowType type)
 {
     if (type == QWebPage::WebBrowserWindow) {
@@ -46,10 +51,7 @@ void HeriotWebView::contextMenuEvent(QContextMenuEvent *event)
 void HeriotWebView::inspect()
 {
     this->myPage->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
+    this->myInspector->setVisible(true);
 
-    QWebInspector* myInspector = new QWebInspector();
-    myInspector->setPage(this->myPage);
-    myInspector->setVisible(true);
-
-    emit createInspector(myInspector);
+    emit openInspector(this->myInspector);
 }

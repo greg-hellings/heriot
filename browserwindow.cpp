@@ -7,6 +7,8 @@
 #include <QWebView>
 #include <QTabWidget>
 #include <QKeyEvent>
+#include <QDockWidget>
+#include <QWebInspector>
 
 BrowserWindow::BrowserWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -114,4 +116,12 @@ void BrowserWindow::iconChanged(const QString &address)
     QUrl url(address);
     QIcon icon = HeriotApplication::instance()->icon(url);
     this->setWindowIcon(icon);
-}
+}/*
+
+void BrowserWindow::openInspector(QWebInspector* inspector)
+{
+    QDockWidget* dockWidget = new QDockWidget(QString("Inspector"), this);
+    dockWidget->setAllowedAreas(Qt::BottomDockWidgetArea | Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+    dockWidget->setWidget(inspector);
+    dockWidget->setVisible(true);
+}*/

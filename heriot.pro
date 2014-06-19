@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     heriotwebpage.cpp \
     sidetabs.cpp \
     browsertab.cpp \
-    maintabwidget.cpp
+    maintabwidget.cpp \
+    webviewwrapper.cpp
 
 HEADERS  += browserwindow.h \
     tabrotatestyle.h \
@@ -30,7 +31,8 @@ HEADERS  += browserwindow.h \
     heriotwebpage.h \
     sidetabs.h \
     browsertab.h \
-    maintabwidget.h
+    maintabwidget.h \
+    webviewwrapper.h
 
 FORMS    += browserwindow.ui \
     sidetabs.ui

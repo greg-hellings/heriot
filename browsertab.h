@@ -3,14 +3,15 @@
 
 #include "opentab.h"
 
+class WebViewWrapper;
 class HeriotWebView;
 
 class BrowserTab : public OpenTab
 {
     Q_OBJECT
 public:
-    BrowserTab(QTreeWidget* parent, const QString& text, HeriotWebView* view);
-    BrowserTab(QTreeWidgetItem* parent, const QString& text, HeriotWebView* view);
+    BrowserTab(QTreeWidget* parent, const QString& text, WebViewWrapper* view);
+    BrowserTab(QTreeWidgetItem* parent, const QString& text, WebViewWrapper* view);
     HeriotWebView* webView() const;
 signals:
 
