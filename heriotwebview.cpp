@@ -4,6 +4,7 @@
 #include <QWebInspector>
 #include <QMenu>
 #include <QWebSettings>
+#include <QDockWidget>
 
 #include "heriotwebpage.h"
 
@@ -45,9 +46,10 @@ void HeriotWebView::contextMenuEvent(QContextMenuEvent *event)
 void HeriotWebView::inspect()
 {
     this->myPage->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
+
     QWebInspector* myInspector = new QWebInspector();
     myInspector->setPage(this->myPage);
     myInspector->setVisible(true);
 
-    // TODO: Make it dockable and close it when the page closes
+    emit createInspector(myInspector);
 }

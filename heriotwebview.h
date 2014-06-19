@@ -18,13 +18,13 @@ protected:
     void contextMenuEvent(QContextMenuEvent *event);
 signals:
     void openNewTab(HeriotWebView* child, HeriotWebView* parent);
+    void createInspector(QWebInspector* inspector);
 
 public slots:
     void inspect();
 
 private:
     HeriotWebPage* myPage;
-    QWebInspector*        myInspector;
 };
 
 #endif // HERIOTWEBVIEW_H

@@ -60,6 +60,7 @@ void MainTabWidget::tabChanged(OpenTab* oldTab, OpenTab* newTab)
         this->disconnect(current, SIGNAL(titleChanged(QString)), this, SLOT(titleChanged(QString)));
         this->disconnect(current, SIGNAL(iconChanged()), this, SLOT(iconChanged()));
         this->disconnect(current, SIGNAL(urlChanged(QUrl)), this, SLOT(iconChanged()));
+        this->disconnect(current, SIGNAL(createInspector(QWebInspector*)), this, SIGNAL(createInspector(QWebInspector*)));
     }
 
     if (webView != NULL) {
@@ -67,6 +68,7 @@ void MainTabWidget::tabChanged(OpenTab* oldTab, OpenTab* newTab)
         this->connect(webView, SIGNAL(titleChanged(QString)), SLOT(titleChanged(QString)));
         this->connect(webView, SIGNAL(iconChanged()), SLOT(iconChanged()));
         this->connect(webView, SIGNAL(urlChanged(QUrl)), SLOT(iconChanged()));
+        this->connect(webView, SIGNAL(createInspector(QWebInspector*)), SIGNAL(createInspector(QWebInspector*)));
 
         this->titleChanged(webView->title());
         this->urlChanged(webView->url());
