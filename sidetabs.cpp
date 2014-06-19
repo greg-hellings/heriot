@@ -92,6 +92,8 @@ void SideTabs::setCurrentTab(OpenTab* newTab)
     this->openTab = newTab;
     if (!newTab->isSelected())
         newTab->setSelected(true);
+    if (oldTab != NULL && oldTab != newTab)
+        oldTab->setSelected(false);
     this->ui->widgets->setCurrentWidget(newTab->widget());
     emit tabChanged(oldTab, newTab);
 }
