@@ -18,6 +18,7 @@ SideTabs::SideTabs(QWidget *parent) :
     this->connect(this->ui->tabs, SIGNAL(itemSelectionChanged()), SLOT(tabChanged()));
 
     this->ui->tabs->setFocusPolicy(Qt::NoFocus);
+    this->ui->tabs->setSelectionMode(QAbstractItemView::SingleSelection);
 }
 
 SideTabs::~SideTabs()
