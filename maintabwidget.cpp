@@ -47,7 +47,9 @@ HeriotWebView* MainTabWidget::currentWebView()
 
 void MainTabWidget::tabChanged(OpenTab* oldTab, OpenTab* newTab)
 {
-    HeriotWebView* webView = dynamic_cast<HeriotWebView*>(newTab->widget());
+    HeriotWebView* webView = NULL;
+    if (newTab != NULL)
+        webView = dynamic_cast<HeriotWebView*>(newTab->widget());
     HeriotWebView* current = NULL;
     if (oldTab != NULL)
         current = dynamic_cast<HeriotWebView*>(oldTab->widget());
@@ -59,14 +61,16 @@ void MainTabWidget::tabChanged(OpenTab* oldTab, OpenTab* newTab)
         this->disconnect(current, SIGNAL(urlChanged(QUrl)), this, SLOT(iconChanged()));
     }
 
-    this->connect(webView, SIGNAL(urlChanged(QUrl)), SLOT(urlChanged(QUrl)));
-    this->connect(webView, SIGNAL(titleChanged(QString)), SLOT(titleChanged(QString)));
-    this->connect(webView, SIGNAL(iconChanged()), SLOT(iconChanged()));
-    this->connect(webView, SIGNAL(urlChanged(QUrl)), SLOT(iconChanged()));
+    if (webView != NULL) {
+        this->connect(webView, SIGNAL(urlChanged(QUrl)), SLOT(urlChanged(QUrl)));
+        this->connect(webView, SIGNAL(titleChanged(QString)), SLOT(titleChanged(QString)));
+        this->connect(webView, SIGNAL(iconChanged()), SLOT(iconChanged()));
+        this->connect(webView, SIGNAL(urlChanged(QUrl)), SLOT(iconChanged()));
 
-    this->titleChanged(webView->title());
-    this->urlChanged(webView->url());
-    this->iconChanged();
+        this->titleChanged(webView->title());
+        this->urlChanged(webView->url());
+        this->iconChanged();
+    }
 }
 
 OpenTab* MainTabWidget::getNewOpenTab(QWidget *content, QTreeWidgetItem *parent)
