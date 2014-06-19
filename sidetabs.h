@@ -39,7 +39,7 @@ private:
 protected:
     OpenTab* findTabByWidget(QWidget* widget);
     void setCurrentWidget(QWidget* newCurrent);
-    void configureNewTab(OpenTab* newTab);
+    virtual void configureNewTab(OpenTab* newTab);
     virtual OpenTab* getNewOpenTab(QWidget* content, QTreeWidgetItem* parent);
     virtual OpenTab* getNewOpenTab(QWidget* content, QTreeWidget* parent);
 };
