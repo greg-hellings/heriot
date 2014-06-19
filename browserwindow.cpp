@@ -1,7 +1,8 @@
 #include "browserwindow.h"
 #include "ui_browserwindow.h"
-#include "maintabswidget.h"
+#include "maintabwidget.h"
 #include "heriotapplication.h"
+#include "heriotwebview.h"
 
 #include <QWebView>
 #include <QTabWidget>
@@ -77,13 +78,13 @@ void BrowserWindow::currentTabTitleChanged(const QString &title)
 
 void BrowserWindow::openNewTab()
 {
-    this->mainTabsWidget->newTab(false);
+    this->mainTabsWidget->newTab(new HeriotWebView(this->mainTabsWidget));
     this->ui->omniBox->setFocus();
 }
 
 void BrowserWindow::openNewChildTab()
 {
-    this->mainTabsWidget->newTab(true);
+    this->mainTabsWidget->newTab(new HeriotWebView(this->mainTabsWidget));
     this->ui->omniBox->setFocus();
 }
 

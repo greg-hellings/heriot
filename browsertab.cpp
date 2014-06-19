@@ -1,9 +1,16 @@
 #include "browsertab.h"
 #include "heriotwebview.h"
+#include "heriotapplication.h"
 
 #include <QTreeWidgetItem>
 
 BrowserTab::BrowserTab(QTreeWidget* parent, const QString& text, HeriotWebView* view) :
+    OpenTab(parent, text, view)
+{
+    this->bind(view);
+}
+
+BrowserTab::BrowserTab(QTreeWidgetItem *parent, const QString &text, HeriotWebView *view) :
     OpenTab(parent, text, view)
 {
     this->bind(view);
@@ -21,7 +28,7 @@ void BrowserTab::bind(const HeriotWebView *view)
 void BrowserTab::loadFinished(bool ok)
 {
     if (ok) {
-        this->setText(0, this->myWebView->title());
+        this->setText(0, this->webView()->title());
     } else {
         this->setText(0, QString("Error"));
     }
@@ -39,7 +46,7 @@ void BrowserTab::titleChanged(const QString &title)
 
 void BrowserTab::iconChanged()
 {
-    QIcon icon = HeriotApplication::instance()->icon(this->myWebView->url());
+    QIcon icon = HeriotApplication::instance()->icon(this->webView()->url());
 
     this->setIcon(0, icon);
 }

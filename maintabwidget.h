@@ -24,12 +24,15 @@ public slots:
     void titleChanged(const QString& title);
     void iconChanged();
     void openNewTab(HeriotWebView *child, HeriotWebView* parent);
-
-protected:
-    void setCurrentWindow();
+    void tabChanged(OpenTab* newTab, OpenTab* oldTab);
 
 private:
     HeriotWebView* currentWebView();
+
+protected:
+    void configureNewTab(OpenTab *newTab);
+    OpenTab* getNewOpenTab(QWidget* content, QTreeWidgetItem* parent);
+    OpenTab* getNewOpenTab(QWidget* content, QTreeWidget* parent);
 };
 
 #endif // MAINTABVIEW_H

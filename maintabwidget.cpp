@@ -1,12 +1,18 @@
 #include "maintabwidget.h"
 
+#include <QWebHistory>
+
 #include "heriotwebview.h"
 #include "opentab.h"
+#include "browsertab.h"
 
 MainTabWidget::MainTabWidget(QWidget *parent) :
     SideTabs(parent)
 {
+    OpenTab* first = this->newTab(new HeriotWebView(), false, true);
     this->setTabAddress("http://www.google.com");
+    this->connect(this, SIGNAL(tabChanged(OpenTab*,OpenTab*)), SLOT(tabChanged(OpenTab*,OpenTab*)));
+    this->tabChanged(first, NULL);
 }
 
 void MainTabWidget::configureNewTab(OpenTab *newTab)
@@ -39,19 +45,38 @@ HeriotWebView* MainTabWidget::currentWebView()
     return dynamic_cast<HeriotWebView*>(this->currentTab()->widget());
 }
 
-void MainTabWidget::setCurrentWindow()
+void MainTabWidget::tabChanged(OpenTab* newTab, OpenTab* oldTab)
 {
-    if (this->myCurrentWebView != NULL) {
-        this->disconnect(this->myCurrentWebView, SIGNAL(urlChanged(QUrl)), this, SLOT(urlChanged(QUrl)));
-        this->disconnect(this->myCurrentWebView, SIGNAL(titleChanged(QString)), this, SLOT(titleChanged(QString)));
-        this->disconnect(this->myCurrentWebView, SIGNAL(iconChanged()), this, SLOT(iconChanged()));
-        this->disconnect(this->myCurrentWebView, SIGNAL(urlChanged(QUrl)), this, SLOT(iconChanged()));
+    HeriotWebView* webView = dynamic_cast<HeriotWebView*>(newTab->widget());
+    HeriotWebView* current = NULL;
+    if (oldTab != NULL)
+        current = dynamic_cast<HeriotWebView*>(oldTab->widget());
+
+    if (current != NULL) {
+        this->disconnect(current, SIGNAL(urlChanged(QUrl)), this, SLOT(urlChanged(QUrl)));
+        this->disconnect(current, SIGNAL(titleChanged(QString)), this, SLOT(titleChanged(QString)));
+        this->disconnect(current, SIGNAL(iconChanged()), this, SLOT(iconChanged()));
+        this->disconnect(current, SIGNAL(urlChanged(QUrl)), this, SLOT(iconChanged()));
     }
 
-    this->connect(newCurrentWindow, SIGNAL(urlChanged(QUrl)), SLOT(urlChanged(QUrl)));
-    this->connect(newCurrentWindow, SIGNAL(titleChanged(QString)), SLOT(titleChanged(QString)));
-    this->connect(newCurrentWindow, SIGNAL(iconChanged()), SLOT(iconChanged()));
-    this->connect(newCurrentWindow, SIGNAL(urlChanged(QUrl)), SLOT(iconChanged()));
+    this->connect(webView, SIGNAL(urlChanged(QUrl)), SLOT(urlChanged(QUrl)));
+    this->connect(webView, SIGNAL(titleChanged(QString)), SLOT(titleChanged(QString)));
+    this->connect(webView, SIGNAL(iconChanged()), SLOT(iconChanged()));
+    this->connect(webView, SIGNAL(urlChanged(QUrl)), SLOT(iconChanged()));
+
+    this->titleChanged(webView->title());
+    this->urlChanged(webView->url());
+    this->iconChanged();
+}
+
+OpenTab* MainTabWidget::getNewOpenTab(QWidget *content, QTreeWidgetItem *parent)
+{
+    return new BrowserTab(parent, QString(""), dynamic_cast<HeriotWebView*>(content));
+}
+
+OpenTab* MainTabWidget::getNewOpenTab(QWidget *content, QTreeWidget *parent)
+{
+    return new BrowserTab(parent, QString(""), dynamic_cast<HeriotWebView*>(content));
 }
 
 void MainTabWidget::navigatePaneBack()
@@ -76,12 +101,12 @@ void MainTabWidget::titleChanged(const QString &title)
 
 void MainTabWidget::iconChanged()
 {
-    emit iconChanged(this->myCurrentWebView->url().toString());
+    emit iconChanged(this->currentWebView()->url().toString());
 }
 
 void MainTabWidget::openNewTab(HeriotWebView *child, HeriotWebView* parent)
 {
-    OpenTab* parentTab = this->findTabByView(parent);
-    OpenTab* tab = this->newTab(child, parent, true);
+    OpenTab* parentTab = this->findTabByWidget(parent);
+    this->newTab(child, parent, true);
     parentTab->setExpanded(true);
 }

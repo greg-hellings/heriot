@@ -10,7 +10,7 @@ OpenTab::OpenTab(QTreeWidget* parent, const QString& text, QWidget* view) :
 {
 }
 
-OpenTab::OpenTab(QTreeWidgetItem* parent, const QString& text, HeriotWebView* view) :
+OpenTab::OpenTab(QTreeWidgetItem* parent, const QString& text, QWidget* view) :
     QTreeWidgetItem(parent, QStringList(text)),
     myWidget(view)
 {
@@ -63,7 +63,7 @@ OpenTab* OpenTab::removeSelf()
     return closestRelative;
 }
 
-QWidget* OpenTab::widget()
+QWidget* OpenTab::widget() const
 {
     return this->myWidget;
 }

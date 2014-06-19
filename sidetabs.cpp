@@ -11,13 +11,11 @@
 SideTabs::SideTabs(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SideTabs()),
-    myCurrentWidget(NULL)
+    openTab(NULL)
 {
     this->ui->setupUi(this);
 
     this->connect(this->ui->tabs, SIGNAL(itemSelectionChanged()), SLOT(tabChanged()));
-
-    this->setCurrentWindow(this->newTab(false));
 
     this->ui->tabs->setFocusPolicy(Qt::NoFocus);
 }
@@ -27,22 +25,54 @@ SideTabs::~SideTabs()
     delete ui;
 }
 
+OpenTab* SideTabs::getNewOpenTab(QWidget* content, QTreeWidgetItem *parent)
+{
+    return new OpenTab(parent, QString(""), content);
+}
+
+OpenTab* SideTabs::getNewOpenTab(QWidget *content, QTreeWidget *parent)
+{
+    return new OpenTab(parent, QString(""), content);
+}
+
+OpenTab* SideTabs::newTab(QWidget *widget, bool childOfActive, bool displayNow)
+{
+    OpenTab* tab = 0;
+    if (childOfActive)
+        tab = this->getNewOpenTab(widget, this->currentTab());
+    else
+        tab = this->getNewOpenTab(widget, this->ui->tabs);
+    this->configureNewTab(tab);
+    if (displayNow || this->openTab == NULL)
+        this->setCurrentTab(tab);
+
+    return tab;
+}
+
+OpenTab* SideTabs::newTab(QWidget *widget, QWidget *parent, bool displayNow)
+{
+    OpenTab* tab = this->getNewOpenTab(widget, this->findTabByWidget(parent));
+    this->configureNewTab(tab);
+    if (displayNow || this->openTab == NULL)
+        this->setCurrentTab(tab);
+
+    return tab;
+}
+
 void SideTabs::closeCurrentTab()
 {
+    OpenTab* oldTab = this->openTab;
     // Remove the webview from the stack
     this->ui->widgets->removeWidget(this->openTab->widget());
     // Promote first child to parent if one exists
     QTreeWidgetItem* newCurrent = this->openTab->removeSelf();
     // And of course we must be sure to always have some sort of tab
-    if (newCurrent == NULL && this->ui->tabs->invisibleRootItem()->childCount() == 0) {
-        this->setCurrentWindow(this->newTab(false));
-    } else if (newCurrent == NULL) {
-        // nop
-    } else {
+    if (newCurrent != NULL) {
         this->openTab = dynamic_cast<OpenTab*>(newCurrent);
         this->ui->tabs->clearSelection();
         this->openTab->setSelected(true);
     }
+    emit tabChanged(oldTab, dynamic_cast<OpenTab*>(newCurrent));
 }
 
 void SideTabs::configureNewTab(OpenTab* newTab)
@@ -50,42 +80,27 @@ void SideTabs::configureNewTab(OpenTab* newTab)
     this->ui->widgets->addWidget(newTab->widget());
 }
 
-HeriotWebView* SideTabs::newTab(bool childOfCurrent, bool displayNow)
-{
-    HeriotWebView* webView = new HeriotWebView(this);
-    OpenTab *tab;
-    if (!childOfCurrent) {
-        tab = new OpenTab(this->ui->tabs, QString("Blank"), webView);
-    } else {
-        tab = new OpenTab(this->myOpenTab, QString("Blank"), webView);
-        this->myOpenTab->setExpanded(true);
-    }
-    this->configureNewTab(webView);
-
-    if (displayNow) {
-        this->setCurrentWindow(webView);
-        // Auto-select tab on creation
-        this->ui->tabs->clearSelection();
-        tab->setSelected(true);
-    }
-
-    return webView;
-}
-
-OpenTab* SideTabs::currentTab()
+OpenTab* SideTabs::currentTab() const
 {
     return this->openTab;
 }
 
-void SideTabs::setCurrentWidget(QWidget *newCurrentWindow)
+void SideTabs::setCurrentTab(OpenTab* newTab)
 {
-    this->myCurrentWidget = newCurrentWindow;
+    OpenTab* oldTab = this->openTab;
+    this->openTab = newTab;
+    if (!newTab->isSelected())
+        newTab->setSelected(true);
+    this->ui->widgets->setCurrentWidget(newTab->widget());
+    emit tabChanged(oldTab, newTab);
+}
 
-    this->ui->widgets->setCurrentWidget(this->myCurrentWebView);
-
-    emit tabAddressUpdated(this->myCurrentWebView->url().toString());
-    emit tabTitleUpdated(this->myCurrentWebView->title());
-    emit iconChanged(this->myCurrentWebView->url().toString());
+void SideTabs::setCurrentWidget(QWidget *newCurrentWidget)
+{
+    OpenTab* newTab = this->findTabByWidget(newCurrentWidget);
+    if (newTab != NULL) {
+        this->setCurrentTab(newTab);
+    }
 }
 
 void SideTabs::tabChanged()
@@ -95,26 +110,25 @@ void SideTabs::tabChanged()
     // selection at a later time, if deselection is possible
     if (tabs.count() == 1) {
         OpenTab* tab = dynamic_cast<OpenTab*>(tabs.at(0));
-        this->setCurrentWindow(tab->webView());
-        this->myOpenTab = tab;
+        this->setCurrentTab(tab);
     }
 }
 
-OpenTab* SideTabs::findTabByView(QWidget *view)
+OpenTab* SideTabs::findTabByWidget(QWidget *view)
 {
     QTreeWidgetItem* item = this->ui->tabs->invisibleRootItem();
-    return this->findTabByViewRecursion(item, view);
+    return this->findTabByWidgetRecursion(item, view);
 }
 
-OpenTab* SideTabs::findTabByViewRecursion(QTreeWidgetItem* item, QWidget* view)
+OpenTab* SideTabs::findTabByWidgetRecursion(QTreeWidgetItem* item, QWidget* view)
 {
     bool found = false;
     for (int i = 0; i < item->childCount() && !found; ++i) {
         OpenTab* tab = dynamic_cast<OpenTab*>(item->child(i));
-        if (tab->webView() == view) {
+        if (tab->widget() == view) {
             return tab;
         }
-        tab = this->findTabByViewRecursion(tab, view);
+        tab = this->findTabByWidgetRecursion(tab, view);
         if (tab != NULL) {
             return tab;
         }

@@ -49,7 +49,7 @@
            <number>0</number>
           </property>
           <item row="0" column="0">
-           <widget class="MainTabsWidget" name="mainTabsWidget" native="true"/>
+           <widget class="MainTabWidget" name="mainTabsWidget" native="true"/>
           </item>
          </layout>
         </widget>
@@ -161,9 +161,9 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>MainTabsWidget</class>
+   <class>MainTabWidget</class>
    <extends>QWidget</extends>
-   <header>maintabswidget.h</header>
+   <header>maintabwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

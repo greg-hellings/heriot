@@ -9,8 +9,9 @@ class BrowserTab : public OpenTab
 {
     Q_OBJECT
 public:
-    explicit BrowserTab(QObject *parent = 0);
-
+    BrowserTab(QTreeWidget* parent, const QString& text, HeriotWebView* view);
+    BrowserTab(QTreeWidgetItem* parent, const QString& text, HeriotWebView* view);
+    HeriotWebView* webView() const;
 signals:
 
 public slots:
