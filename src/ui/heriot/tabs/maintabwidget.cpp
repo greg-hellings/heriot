@@ -6,11 +6,13 @@
 #include "src/ui/tabs/opentab.h"
 #include "browsertab.h"
 #include "src/ui/heriot/web/webviewwrapper.h"
+#include "src/web/cookiejar.h"
 
 MainTabWidget::MainTabWidget(QWidget *parent) :
-    SideTabs(parent)
+    SideTabs(parent),
+    cookieJar(new CookieJar())
 {
-    OpenTab* first = this->newTab(new HeriotWebView(), false, true);
+    OpenTab* first = this->newTab(this->getNewWebView(), false, true);
     this->setTabAddress("http://www.google.com");
     this->connect(this, SIGNAL(tabChanged(OpenTab*,OpenTab*)), SLOT(tabChanged(OpenTab*,OpenTab*)));
     this->connect(this, SIGNAL(closedTab(int)), SLOT(tabClosing(int)));
@@ -90,6 +92,16 @@ OpenTab* MainTabWidget::getNewOpenTab(QWidget *content, QTreeWidget *parent)
     return new BrowserTab(parent, QString(""), wrapper);
 }
 
+HeriotWebView* MainTabWidget::getNewWebView(QWidget* parent)
+{
+    if (parent == 0 || parent == NULL)
+        parent = this;
+    HeriotWebView* webView = new HeriotWebView(parent);
+    webView->page()->networkAccessManager()->setCookieJar(this->cookieJar);
+    this->cookieJar->setParent(this);
+    return webView;
+}
+
 void MainTabWidget::navigatePaneBack()
 {
     this->currentWebView()->page()->history()->back();
@@ -125,5 +137,5 @@ void MainTabWidget::openNewTab(HeriotWebView *child, HeriotWebView* parent)
 void MainTabWidget::tabClosing(int remainingTabs)
 {
     if (remainingTabs == 0)
-        this->setCurrentTab(this->newTab(new HeriotWebView(this)));
+        this->setCurrentTab(this->newTab(this->getNewWebView()));
 }

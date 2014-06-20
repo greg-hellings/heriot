@@ -21,7 +21,7 @@ bool HeriotWebPage::acceptNavigationRequest(QWebFrame *frame, const QNetworkRequ
         }
         if (widget != NULL) {
             MainTabWidget* parent = dynamic_cast<MainTabWidget*>(widget->parent());
-            BrowserTab* tab = dynamic_cast<BrowserTab*>(parent->newTab(new HeriotWebView(parent), true, false));
+            BrowserTab* tab = dynamic_cast<BrowserTab*>(parent->newTab(parent->getNewWebView(), true, false));
             HeriotWebView* webView = tab->webView();
             webView->load(request);
 

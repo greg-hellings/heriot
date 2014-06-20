@@ -1,7 +1,13 @@
+TODOs:
+v 0.0.1
+* Shared cookie jar between tabs
+
 v 0.1
 * Enable to-disk persistence for things like cookies, etc.
 * Persist tabs between sessions
 * Remove ugly blue selection bar for QTreeView
+* Auto-expand tabs with new children
+* Auto-open Inspector if parent has open inspector
 
 v 0.2
 * Re-open closed tabs
@@ -13,3 +19,9 @@ v 0.3
 * Settings
 
 Default Icon from http://findicons.com/icon/32911/shield_security?id=33026 License: Freeware, Designer: Teekatas
+
+COMPLETED:
+v 0.0.1
+* Basic tree tabs
+* Don't crash all the time
+* Openable Inspector

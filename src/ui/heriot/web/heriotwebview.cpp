@@ -7,6 +7,7 @@
 #include <QDockWidget>
 
 #include "heriotwebpage.h"
+#include "src/ui/heriot/tabs/maintabwidget.h"
 
 HeriotWebView::HeriotWebView(QWidget *parent) :
     QWebView(parent)
@@ -27,7 +28,7 @@ QWebInspector* HeriotWebView::webInspector() const
 QWebView* HeriotWebView::createWindow(QWebPage::WebWindowType type)
 {
     if (type == QWebPage::WebBrowserWindow) {
-        HeriotWebView* view = new HeriotWebView(dynamic_cast<QWidget*>(this->parent()));
+        HeriotWebView* view = (dynamic_cast<MainTabWidget*>(this->parent()))->getNewWebView();
         emit openNewTab(view, this);
         return view;
     } else {

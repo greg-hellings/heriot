@@ -31,7 +31,7 @@ public slots:
     // Needs a separate title because of changing titles without nav or while changing tabs
     void currentTabTitleChanged(const QString& title);
     // User requested
-    void openNewTab();
+    void openNewTab(bool child = false);
     void openNewChildTab();
     void newWindow();
     void onCloseCurrentTab();

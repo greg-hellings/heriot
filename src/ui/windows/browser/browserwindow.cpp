@@ -24,7 +24,7 @@ BrowserWindow::BrowserWindow(QWidget *parent) :
     this->connect(this->mainTabsWidget, SIGNAL(tabAddressUpdated(QString)), SLOT(iconChanged(QString)));
     this->connect(this->mainTabsWidget, SIGNAL(iconChanged(QString)), SLOT(iconChanged(QString)));
 
-    this->connect(this->ui->actionNew_Tab, SIGNAL(triggered()), SLOT(openNewTab()));
+    this->connect(this->ui->actionNew_Tab, SIGNAL(triggered()), SLOT(openNewTab(bool)));
     this->connect(this->ui->actionNew_Child_Tab, SIGNAL(triggered()), SLOT(openNewChildTab()));
 
     this->connect(this->ui->backButton, SIGNAL(clicked(bool)), SLOT(backNavigation(bool)));
@@ -78,16 +78,16 @@ void BrowserWindow::currentTabTitleChanged(const QString &title)
     this->setWindowTitle(title);
 }
 
-void BrowserWindow::openNewTab()
+void BrowserWindow::openNewTab(bool child)
 {
-    this->mainTabsWidget->newTab(new HeriotWebView(this->mainTabsWidget));
+    HeriotWebView* webView = this->mainTabsWidget->getNewWebView();
+    this->mainTabsWidget->newTab(webView, child);
     this->ui->omniBox->setFocus();
 }
 
 void BrowserWindow::openNewChildTab()
 {
-    this->mainTabsWidget->newTab(new HeriotWebView(this->mainTabsWidget), true);
-    this->ui->omniBox->setFocus();
+    this->openNewTab(true);
 }
 
 void BrowserWindow::backNavigation(bool)
