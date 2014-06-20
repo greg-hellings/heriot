@@ -8,7 +8,6 @@ v 0.1
 * Auto-expand tabs with new children
 * Auto-open Inspector if parent has open inspector
 * Open from file
-* Auto-select omnibar text when Ctrl-L
 
 v 0.2
 * Re-open closed tabs
@@ -26,6 +25,9 @@ v 0.3
 Default Icon from http://findicons.com/icon/32911/shield_security?id=33026 License: Freeware, Designer: Teekatas
 
 COMPLETED:
+v 0.1
+* Auto-select omnibar text when Ctrl-L
+
 v 0.0.1
 * Basic tree tabs
 * Don't crash all the time

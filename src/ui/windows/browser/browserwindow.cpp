@@ -50,6 +50,7 @@ void BrowserWindow::keyPressEvent(QKeyEvent *event)
     case Qt::Key_L:
         if (event->modifiers() & Qt::ControlModifier) {
             this->ui->omniBox->setFocus();
+            this->ui->omniBox->selectAll();
         }
         event->ignore();
         break;
