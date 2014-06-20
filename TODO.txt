@@ -7,6 +7,7 @@ v 0.1
 * Remove ugly blue selection bar for QTreeView
 * Auto-expand tabs with new children
 * Auto-open Inspector if parent has open inspector
+* Open from file
 
 v 0.2
 * Re-open closed tabs
