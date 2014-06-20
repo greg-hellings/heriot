@@ -35,6 +35,7 @@ public slots:
     void openNewChildTab();
     void newWindow();
     void onCloseCurrentTab();
+    void onOpenFile();
 
 private:
     Ui::BrowserWindow *ui;

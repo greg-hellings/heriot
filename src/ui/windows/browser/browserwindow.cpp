@@ -9,6 +9,7 @@
 #include <QKeyEvent>
 #include <QDockWidget>
 #include <QWebInspector>
+#include <QFileDialog>
 
 BrowserWindow::BrowserWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -26,13 +27,13 @@ BrowserWindow::BrowserWindow(QWidget *parent) :
 
     this->connect(this->ui->actionNew_Tab, SIGNAL(triggered()), SLOT(openNewTab()));
     this->connect(this->ui->actionNew_Child_Tab, SIGNAL(triggered()), SLOT(openNewChildTab()));
-
-    this->connect(this->ui->backButton, SIGNAL(clicked(bool)), SLOT(backNavigation(bool)));
-    this->connect(this->ui->forwardButton, SIGNAL(clicked(bool)), SLOT(forwardNavigation(bool)));
-
     this->connect(this->ui->actionExit, SIGNAL(triggered()), SLOT(quit()));
     this->connect(this->ui->actionClose_Window, SIGNAL(triggered()), SLOT(close()));
     this->connect(this->ui->actionNew_Window, SIGNAL(triggered()), SLOT(newWindow()));
+    this->connect(this->ui->actionOpen_File, SIGNAL(triggered()), SLOT(onOpenFile()));
+
+    this->connect(this->ui->backButton, SIGNAL(clicked(bool)), SLOT(backNavigation(bool)));
+    this->connect(this->ui->forwardButton, SIGNAL(clicked(bool)), SLOT(forwardNavigation(bool)));
 
     this->connect(this->ui->actionClose_Tab, SIGNAL(triggered()), SLOT(onCloseCurrentTab()));
 
@@ -117,12 +118,16 @@ void BrowserWindow::iconChanged(const QString &address)
     QUrl url(address);
     QIcon icon = HeriotApplication::instance()->icon(url);
     this->setWindowIcon(icon);
-}/*
+}
 
-void BrowserWindow::openInspector(QWebInspector* inspector)
+void BrowserWindow::onOpenFile()
 {
-    QDockWidget* dockWidget = new QDockWidget(QString("Inspector"), this);
-    dockWidget->setAllowedAreas(Qt::BottomDockWidgetArea | Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-    dockWidget->setWidget(inspector);
-    dockWidget->setVisible(true);
-}*/
+    QFileDialog fileDialog(this, QString("Open a file"));
+    fileDialog.setViewMode(QFileDialog::Detail);
+    fileDialog.setFileMode(QFileDialog::ExistingFile);
+    fileDialog.setVisible(true);
+    if (fileDialog.exec()) {
+        QList<QUrl> urls = fileDialog.selectedUrls();
+        this->mainTabsWidget->setTabAddress(urls.at(0).toString());
+    }
+}

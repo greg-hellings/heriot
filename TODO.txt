@@ -6,7 +6,6 @@ v 0.1
 * Persist tabs between sessions
 * Remove ugly blue selection bar for QTreeView
 * Auto-open Inspector if parent has open inspector
-* Open from file
 
 v 0.2
 * Re-open closed tabs
@@ -20,6 +19,7 @@ v 0.3
 * Settings
 * NoScript-like action
 * AdBlock-lik action
+* Download file
 
 Default Icon from http://findicons.com/icon/32911/shield_security?id=33026 License: Freeware, Designer: Teekatas
 
@@ -27,6 +27,7 @@ COMPLETED:
 v 0.1
 * Auto-select omnibar text when Ctrl-L
 * Auto-expand tabs with new children
+* Open from file
 
 v 0.0.1
 * Basic tree tabs

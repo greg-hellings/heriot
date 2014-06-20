@@ -39,13 +39,31 @@
     <item>
      <widget class="QWidget" name="widget" native="true">
       <layout class="QGridLayout" name="gridLayout">
-       <property name="margin">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
         <number>0</number>
        </property>
        <item row="1" column="0" colspan="3">
         <widget class="QFrame" name="mainTabsPlaceholder">
          <layout class="QGridLayout" name="gridLayout_2">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <item row="0" column="0">
@@ -91,7 +109,7 @@
      <x>0</x>
      <y>0</y>
      <width>1125</width>
-     <height>27</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -101,6 +119,7 @@
     <addaction name="actionNew_Tab"/>
     <addaction name="actionNew_Child_Tab"/>
     <addaction name="actionNew_Window"/>
+    <addaction name="actionOpen_File"/>
     <addaction name="separator"/>
     <addaction name="actionClose_Tab"/>
     <addaction name="actionClose_Window"/>
@@ -155,6 +174,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+W</string>
+   </property>
+  </action>
+  <action name="actionOpen_File">
+   <property name="text">
+    <string>Open File</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
    </property>
   </action>
  </widget>
