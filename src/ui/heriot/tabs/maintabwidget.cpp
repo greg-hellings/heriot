@@ -96,7 +96,7 @@ HeriotWebView* MainTabWidget::getNewWebView(QWidget* parent)
 {
     if (parent == 0 || parent == NULL)
         parent = this;
-    HeriotWebView* webView = new HeriotWebView(parent);
+    HeriotWebView* webView = new HeriotWebView(this, parent);
     webView->page()->networkAccessManager()->setCookieJar(this->cookieJar);
     this->cookieJar->setParent(this);
     return webView;
@@ -129,8 +129,8 @@ void MainTabWidget::iconChanged()
 
 void MainTabWidget::openNewTab(HeriotWebView *child, HeriotWebView* parent)
 {
-    OpenTab* parentTab = this->findTabByWidget(parent);
-    this->newTab(child, parent, true);
+    OpenTab* parentTab = this->findTabByWidget(parent->webViewWrapper());
+    this->newTab(child, parent->parent(), true);
     parentTab->setExpanded(true);
 }
 

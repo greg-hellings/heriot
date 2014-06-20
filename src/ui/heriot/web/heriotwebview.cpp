@@ -7,10 +7,12 @@
 #include <QDockWidget>
 
 #include "heriotwebpage.h"
+#include "webviewwrapper.h"
 #include "src/ui/heriot/tabs/maintabwidget.h"
 
-HeriotWebView::HeriotWebView(QWidget *parent) :
-    QWebView(parent)
+HeriotWebView::HeriotWebView(MainTabWidget* tabs, QWidget *parent) :
+    QWebView(parent),
+    myTabs(tabs)
 {
     this->myPage = new HeriotWebPage(this);
     this->setPage(this->myPage);
@@ -25,10 +27,26 @@ QWebInspector* HeriotWebView::webInspector() const
     return this->myInspector;
 }
 
+MainTabWidget* HeriotWebView::mainTabWidget() const
+{
+    return this->myTabs;
+}
+
+WebViewWrapper* HeriotWebView::webViewWrapper() const
+{
+    return this->myWebViewWrapper;
+}
+
+void HeriotWebView::setWebViewWrapper(WebViewWrapper *wrapper)
+{
+    this->myWebViewWrapper = wrapper;
+}
+
+
 QWebView* HeriotWebView::createWindow(QWebPage::WebWindowType type)
 {
     if (type == QWebPage::WebBrowserWindow) {
-        HeriotWebView* view = (dynamic_cast<MainTabWidget*>(this->parent()))->getNewWebView();
+        HeriotWebView* view = this->mainTabWidget()->getNewWebView();
         emit openNewTab(view, this);
         return view;
     } else {

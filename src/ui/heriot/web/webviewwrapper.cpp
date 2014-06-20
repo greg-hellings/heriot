@@ -21,6 +21,7 @@ void WebViewWrapper::addWebView(HeriotWebView *view)
     this->o_webView = view;
     this->splitter->insertWidget(0, view);
     this->addWebInspector(view->webInspector());
+    view->setWebViewWrapper(this);
 }
 
 void WebViewWrapper::addWebInspector(QWebInspector *inspector)
