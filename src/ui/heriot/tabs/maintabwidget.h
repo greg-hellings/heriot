@@ -1,7 +1,7 @@
 #ifndef MAINTABWIDGET_H
 #define MAINTABWIDGET_H
 
-#include "sidetabs.h"
+#include "src/ui/tabs/sidetabs.h"
 
 class HeriotWebView;
 class QWebInspector;

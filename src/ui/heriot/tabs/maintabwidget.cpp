@@ -2,10 +2,10 @@
 
 #include <QWebHistory>
 
-#include "heriotwebview.h"
-#include "opentab.h"
+#include "src/ui/heriot/web/heriotwebview.h"
+#include "src/ui/tabs/opentab.h"
 #include "browsertab.h"
-#include "webviewwrapper.h"
+#include "src/ui/heriot/web/webviewwrapper.h"
 
 MainTabWidget::MainTabWidget(QWidget *parent) :
     SideTabs(parent)

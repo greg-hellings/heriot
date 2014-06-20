@@ -1,7 +1,7 @@
 #ifndef BROWSERTAB_H
 #define BROWSERTAB_H
 
-#include "opentab.h"
+#include "src/ui/tabs/opentab.h"
 
 class WebViewWrapper;
 class HeriotWebView;

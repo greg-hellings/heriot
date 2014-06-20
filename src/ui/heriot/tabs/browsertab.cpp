@@ -1,7 +1,7 @@
 #include "browsertab.h"
-#include "heriotwebview.h"
-#include "heriotapplication.h"
-#include "webviewwrapper.h"
+#include "src/ui/heriot/web/heriotwebview.h"
+#include "src/heriotapplication.h"
+#include "src/ui/heriot/web/webviewwrapper.h"
 
 #include <QTreeWidgetItem>
 

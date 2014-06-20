@@ -1,8 +1,8 @@
 #include "browserwindow.h"
 #include "ui_browserwindow.h"
-#include "maintabwidget.h"
-#include "heriotapplication.h"
-#include "heriotwebview.h"
+#include "src/ui/heriot/tabs/maintabwidget.h"
+#include "src/heriotapplication.h"
+#include "src/ui/heriot/web/heriotwebview.h"
 
 #include <QWebView>
 #include <QTabWidget>

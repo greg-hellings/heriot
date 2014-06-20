@@ -163,7 +163,7 @@
   <customwidget>
    <class>MainTabWidget</class>
    <extends>QWidget</extends>
-   <header>maintabwidget.h</header>
+   <header>src/ui/heriot/tabs/maintabwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

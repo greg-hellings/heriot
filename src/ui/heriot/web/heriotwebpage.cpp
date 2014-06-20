@@ -1,8 +1,8 @@
 #include "heriotwebpage.h"
 #include "heriotwebview.h"
-#include "maintabwidget.h"
-#include "opentab.h"
-#include "browsertab.h"
+#include "src/ui/heriot/tabs/maintabwidget.h"
+#include "src/ui/tabs/opentab.h"
+#include "src/ui/heriot/tabs/browsertab.h"
 
 HeriotWebPage::HeriotWebPage(QWidget *parent) :
     QWebPage(parent),

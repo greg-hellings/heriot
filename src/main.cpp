@@ -1,4 +1,4 @@
-#include "browserwindow.h"
+#include "src/ui/windows/browser/browserwindow.h"
 #include <QApplication>
 #include "heriotapplication.h"
 
