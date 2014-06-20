@@ -98,7 +98,7 @@ QTreeView::item:selected {
      <widget class="QStackedWidget" name="widgets">
       <property name="minimumSize">
        <size>
-        <width>450</width>
+        <width>850</width>
         <height>450</height>
        </size>
       </property>

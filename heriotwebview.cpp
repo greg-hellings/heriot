@@ -13,8 +13,10 @@ HeriotWebView::HeriotWebView(QWidget *parent) :
 {
     this->myPage = new HeriotWebPage(this);
     this->setPage(this->myPage);
-    this->myInspector = new QWebInspector();
+    this->myInspector = new QWebInspector(this);
     this->myInspector->setPage(this->myPage);
+    this->myInspector->setVisible(true);
+    this->myInspector->hide();
 }
 
 QWebInspector* HeriotWebView::webInspector() const
@@ -44,6 +46,7 @@ void HeriotWebView::contextMenuEvent(QContextMenuEvent *event)
 {
     QMenu* menu = this->myPage->createStandardContextMenu();
     menu->move(event->globalX(), event->globalY());
+    menu->removeAction(this->pageAction(QWebPage::InspectElement));
     menu->addAction("Inspect", this, SLOT(inspect()));
     menu->setVisible(true);
 }
@@ -51,7 +54,7 @@ void HeriotWebView::contextMenuEvent(QContextMenuEvent *event)
 void HeriotWebView::inspect()
 {
     this->myPage->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
-    this->myInspector->setVisible(true);
+    this->myInspector->show();
 
     emit openInspector(this->myInspector);
 }
