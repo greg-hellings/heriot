@@ -1,6 +1,5 @@
 TODOs:
 v 0.0.1
-* Shared cookie jar between tabs
 
 v 0.1
 * Enable to-disk persistence for things like cookies, etc.
@@ -25,3 +24,4 @@ v 0.0.1
 * Basic tree tabs
 * Don't crash all the time
 * Openable Inspector
+* Shared cookie jar between tabs
