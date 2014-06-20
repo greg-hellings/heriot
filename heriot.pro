@@ -24,7 +24,6 @@ SOURCES += src/main.cpp\
     src/ui/heriot/web/webviewwrapper.cpp
 
 HEADERS  += src/ui/windows/browser/browserwindow.h \
-    tabrotatestyle.h \
     src/ui/heriot/web/heriotwebview.h \
     src/ui/tabs/opentab.h \
     src/heriotapplication.h \
