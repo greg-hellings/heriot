@@ -1,0 +1,14 @@
+Build instructions
+
+1) Install Qt development tools
+    - In Fedora you'll minimally want qt5-qtbase-devel and qt5-qtwebkit-devel
+    - In other distributions you'll want the equivalents
+    - In Windows you'll need the MinGW builds or to build yourself from source as the MSVC builds apparently do not have SSL enabled
+    - In Mac OS X you're fine with the default set of packages from the installer
+2) Optionally install Qt Creator
+2a) Open heriot.pro in Qt Creator
+2b) Select Run
+3) Optionally do not install Qt Creator
+3a) Execute $ qmake
+3b) Execute $ make
+3c) Execute the resulting built system
