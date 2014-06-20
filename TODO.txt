@@ -5,7 +5,6 @@ v 0.1
 * Enable to-disk persistence for things like cookies, etc.
 * Persist tabs between sessions
 * Remove ugly blue selection bar for QTreeView
-* Auto-expand tabs with new children
 * Auto-open Inspector if parent has open inspector
 * Open from file
 
@@ -27,6 +26,7 @@ Default Icon from http://findicons.com/icon/32911/shield_security?id=33026 Licen
 COMPLETED:
 v 0.1
 * Auto-select omnibar text when Ctrl-L
+* Auto-expand tabs with new children
 
 v 0.0.1
 * Basic tree tabs

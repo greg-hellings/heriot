@@ -39,9 +39,10 @@ OpenTab* SideTabs::getNewOpenTab(QWidget *content, QTreeWidget *parent)
 OpenTab* SideTabs::newTab(QWidget *widget, bool childOfActive, bool displayNow)
 {
     OpenTab* tab = 0;
-    if (childOfActive)
+    if (childOfActive) {
         tab = this->getNewOpenTab(widget, this->currentTab());
-    else
+        this->currentTab()->setExpanded(true);
+    } else
         tab = this->getNewOpenTab(widget, this->ui->tabs);
     this->configureNewTab(tab);
     if (displayNow || this->openTab == NULL)
