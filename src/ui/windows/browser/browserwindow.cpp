@@ -24,7 +24,7 @@ BrowserWindow::BrowserWindow(QWidget *parent) :
     this->connect(this->mainTabsWidget, SIGNAL(tabAddressUpdated(QString)), SLOT(iconChanged(QString)));
     this->connect(this->mainTabsWidget, SIGNAL(iconChanged(QString)), SLOT(iconChanged(QString)));
 
-    this->connect(this->ui->actionNew_Tab, SIGNAL(triggered()), SLOT(openNewTab(bool)));
+    this->connect(this->ui->actionNew_Tab, SIGNAL(triggered()), SLOT(openNewTab()));
     this->connect(this->ui->actionNew_Child_Tab, SIGNAL(triggered()), SLOT(openNewChildTab()));
 
     this->connect(this->ui->backButton, SIGNAL(clicked(bool)), SLOT(backNavigation(bool)));
