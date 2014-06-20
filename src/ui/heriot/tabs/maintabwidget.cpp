@@ -54,10 +54,10 @@ void MainTabWidget::tabChanged(OpenTab* oldTab, OpenTab* newTab)
 {
     HeriotWebView* webView = NULL;
     if (newTab != NULL)
-        webView = dynamic_cast<HeriotWebView*>(newTab->widget());
+        webView = (dynamic_cast<BrowserTab*>(newTab))->webView();
     HeriotWebView* current = NULL;
     if (oldTab != NULL)
-        current = dynamic_cast<HeriotWebView*>(oldTab->widget());
+        current = (dynamic_cast<BrowserTab*>(oldTab))->webView();
 
     if (current != NULL) {
         this->disconnect(current, SIGNAL(urlChanged(QUrl)), this, SLOT(urlChanged(QUrl)));
