@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QTreeWidgetItem>
 
-#include "heriotwebview.h"
+#include "src/ui/heriot/web/heriotwebview.h"
 
 class QTreeWidget;
 

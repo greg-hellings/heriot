@@ -2,7 +2,7 @@
 #include "ui_sidetabs.h"
 
 #include "opentab.h"
-#include "heriotwebview.h"
+#include "src/ui/heriot/web/heriotwebview.h"
 
 #include <QItemSelectionModel>
 #include <QSizePolicy>

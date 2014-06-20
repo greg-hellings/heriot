@@ -1,5 +1,5 @@
 #include "opentab.h"
-#include "heriotapplication.h"
+#include "src/heriotapplication.h"
 
 #include <QTreeWidgetItem>
 #include <QTimer>
