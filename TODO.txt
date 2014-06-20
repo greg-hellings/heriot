@@ -1,5 +1,4 @@
 * Enable to-disk persistence for things like cookies, etc.
-* Improve choices for locating WebInspector in-frame.
 * Persist tabs between sessions
 * Remove ugly blue selection bar for QTreeView
 

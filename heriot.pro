@@ -12,30 +12,30 @@ TARGET = heriot
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        browserwindow.cpp \
-    heriotwebview.cpp \
-    opentab.cpp \
-    heriotapplication.cpp \
-    heriotwebpage.cpp \
-    sidetabs.cpp \
-    browsertab.cpp \
-    maintabwidget.cpp \
-    webviewwrapper.cpp
+SOURCES += src/main.cpp\
+        src/ui/windows/browser/browserwindow.cpp \
+    src/ui/heriot/web/heriotwebview.cpp \
+    src/ui/tabs/opentab.cpp \
+    src/heriotapplication.cpp \
+    src/ui/heriot/web/heriotwebpage.cpp \
+    src/ui/tabs/sidetabs.cpp \
+    src/ui/heriot/tabs/browsertab.cpp \
+    src/ui/heriot/tabs/maintabwidget.cpp \
+    src/ui/heriot/web/webviewwrapper.cpp
 
-HEADERS  += browserwindow.h \
+HEADERS  += src/ui/windows/browser/browserwindow.h \
     tabrotatestyle.h \
-    heriotwebview.h \
-    opentab.h \
-    heriotapplication.h \
-    heriotwebpage.h \
-    sidetabs.h \
-    browsertab.h \
-    maintabwidget.h \
-    webviewwrapper.h
+    src/ui/heriot/web/heriotwebview.h \
+    src/ui/tabs/opentab.h \
+    src/heriotapplication.h \
+    src/ui/heriot/web/heriotwebpage.h \
+    src/ui/tabs/sidetabs.h \
+    src/ui/heriot/tabs/browsertab.h \
+    src/ui/heriot/tabs/maintabwidget.h \
+    src/ui/heriot/web/webviewwrapper.h
 
-FORMS    += browserwindow.ui \
-    sidetabs.ui
+FORMS    += src/ui/windows/browser/browserwindow.ui \
+    src/ui/tabs/sidetabs.ui
 
 OTHER_FILES += \
     TODO.txt
