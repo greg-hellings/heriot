@@ -1,5 +1,15 @@
+v 0.1
 * Enable to-disk persistence for things like cookies, etc.
 * Persist tabs between sessions
 * Remove ugly blue selection bar for QTreeView
+
+v 0.2
+* Re-open closed tabs
+* Reorder tabs
+* Keyboard tab navigation
+* Close/undock inspector
+
+v 0.3
+* Settings
 
 Default Icon from http://findicons.com/icon/32911/shield_security?id=33026 License: Freeware, Designer: Teekatas
