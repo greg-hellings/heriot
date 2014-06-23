@@ -22,7 +22,9 @@ SOURCES += src/main.cpp\
     src/ui/heriot/tabs/browsertab.cpp \
     src/ui/heriot/tabs/maintabwidget.cpp \
     src/ui/heriot/web/webviewwrapper.cpp \
-    src/web/cookiejar.cpp
+    src/web/cookiejar.cpp \
+    src/settings/heriotsettings.cpp \
+    src/settings/tabsettings.cpp
 
 HEADERS  += src/ui/windows/browser/browserwindow.h \
     src/ui/heriot/web/heriotwebview.h \
@@ -33,7 +35,9 @@ HEADERS  += src/ui/windows/browser/browserwindow.h \
     src/ui/heriot/tabs/browsertab.h \
     src/ui/heriot/tabs/maintabwidget.h \
     src/ui/heriot/web/webviewwrapper.h \
-    src/web/cookiejar.h
+    src/web/cookiejar.h \
+    src/settings/heriotsettings.h \
+    src/settings/tabsettings.h
 
 FORMS    += src/ui/windows/browser/browserwindow.ui \
     src/ui/tabs/sidetabs.ui

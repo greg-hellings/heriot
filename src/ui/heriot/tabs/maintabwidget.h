@@ -2,6 +2,7 @@
 #define MAINTABWIDGET_H
 
 #include "src/ui/tabs/sidetabs.h"
+#include "src/settings/heriotsettings.h"
 
 class HeriotWebView;
 class QWebInspector;
@@ -17,6 +18,7 @@ public:
     void navigatePaneBack();
     void navigatePaneForward();
     HeriotWebView* getNewWebView(QWidget* parent = 0);
+    TabSettings* getTabSettings();
 signals:
     void tabAddressUpdated(const QString& address);
     void tabTitleUpdated(const QString& title);

@@ -102,6 +102,13 @@ HeriotWebView* MainTabWidget::getNewWebView(QWidget* parent)
     return webView;
 }
 
+TabSettings* MainTabWidget::getTabSettings()
+{
+    TabSettings* tabSettings = new TabSettings();
+
+    return tabSettings;
+}
+
 void MainTabWidget::navigatePaneBack()
 {
     this->currentWebView()->page()->history()->back();

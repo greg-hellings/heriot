@@ -11,6 +11,8 @@ HeriotApplication::HeriotApplication(int& argc, char** argv) :
 {
     // Delay some tasks for after the window is created
     QTimer::singleShot(0, this, SLOT(postLaunch()));
+    QCoreApplication::setOrganizationName("Heriot Browser Project");
+    QCoreApplication::setApplicationName("Heriot Browser");
 }
 
 HeriotApplication* HeriotApplication::instance()
