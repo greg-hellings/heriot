@@ -6,6 +6,7 @@ v 0.1
 * Persist tabs between sessions
 * Remove ugly blue selection bar for QTreeView
 * Auto-open Inspector if parent has open inspector
+* In-page search
 
 v 0.2
 * Re-open closed tabs
