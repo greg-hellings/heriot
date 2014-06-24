@@ -26,6 +26,12 @@ void TabSetting::setUrl(const QString &url)
     this->insert(urlKey, url);
 }
 
+/**
+ * @brief TabSetting::children
+ * @return Pointer to a TabSettingList of all the children on this item
+ *
+ * User is responsible to delete the list when they are finished with it, along with its contents
+ */
 TabSettingList* TabSetting::children() const
 {
     TabSettingList* tabSettingList = new TabSettingList();
@@ -53,11 +59,49 @@ void TabSetting::setChildren(const TabSettingList &children)
 /***********************
  * Trollolololol
  ***********************/
-void TabSettings::insert(const TabSettingList &list)
+TabSettings::TabSettings() :
+    tabSettingList(new TabSettingList())
+{}
+
+TabSettings::TabSettings(const QString &document) :
+    QJsonDocument(QJsonDocument::fromJson(document.toUtf8())),
+    tabSettingList(new TabSettingList())
+{
+    QJsonArray myArray = this->array();
+    for (QJsonArray::iterator it = myArray.begin(); it != myArray.end(); ++it) {
+        this->tabSettingList->append(new TabSetting((*it).toObject()));
+    }
+}
+
+TabSettings::~TabSettings()
+{
+    for (int i = this->tabSettingList->count(); i >= 0; --i) {
+        delete this->tabSettingList->takeAt(i);
+    }
+    delete this->tabSettingList;
+}
+
+void TabSettings::set(const TabSettingList &list)
 {
     QJsonArray jsonArray;
     for (TabSettingList::const_iterator it = list.begin(); it != list.end(); ++it) {
         jsonArray.append(**it);
     }
     this->setArray(jsonArray);
+    this->tabSettingList = new TabSettingList(list);
+}
+
+void TabSettings::addSetting(TabSetting *setting)
+{
+    this->tabSettingList->append(setting);
+}
+
+const TabSettingList* TabSettings::get()
+{
+    return this->tabSettingList;
+}
+
+QString TabSettings::toString()
+{
+    return QString(QJsonDocument::toJson());
 }

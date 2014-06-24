@@ -19,13 +19,24 @@ public:
     void setUrl(const QString& url);
     TabSettingList* children() const;
     void setChildren(const TabSettingList& children);
+
+private:
     void setChildren(const QJsonArray& children);
 };
 
-class TabSettings : public QJsonDocument
+class TabSettings : private QJsonDocument
 {
 public:
-    void insert(const TabSettingList& list);
+    TabSettings(const QString& document);
+    TabSettings();
+    ~TabSettings();
+
+    void set(const TabSettingList& list);
+    const TabSettingList* get();
+    void addSetting(TabSetting* setting);
+    QString toString();
+private:
+    TabSettingList* tabSettingList;
 };
 
 #endif // TABSETTINGS_H
