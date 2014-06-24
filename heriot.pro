@@ -47,3 +47,5 @@ OTHER_FILES += \
 
 RESOURCES += \
     data.qrc
+
+RC_ICONS = heriot.ico
