@@ -142,3 +142,13 @@ OpenTab* SideTabs::findTabByWidgetRecursion(QTreeWidgetItem* item, QWidget* view
 
     return NULL;
 }
+
+QList<OpenTab*>* SideTabs::openTabs()
+{
+    QList<OpenTab*>* openTabs = new QList<OpenTab*>();
+    QTreeWidgetItem* root = this->ui->tabs->invisibleRootItem();
+    for (int i = 0; i < root->childCount(); ++i) {
+        openTabs->append(dynamic_cast<OpenTab*>(root->child(i)));
+    }
+    return openTabs;
+}

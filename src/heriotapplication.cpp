@@ -45,4 +45,6 @@ void HeriotApplication::postLaunch()
     QWebSettings* settings = QWebSettings::globalSettings();
     settings->setAttribute(QWebSettings::DnsPrefetchEnabled, true);
     settings->setThirdPartyCookiePolicy(QWebSettings::AllowThirdPartyWithExistingCookies);
+
+    this->connect(this, SIGNAL(aboutToQuit()), SLOT(closeAllWindows()));
 }

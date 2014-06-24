@@ -104,8 +104,14 @@ HeriotWebView* MainTabWidget::getNewWebView(QWidget* parent)
 
 TabSettings* MainTabWidget::getTabSettings()
 {
+    QList<OpenTab*>* openTabs = this->openTabs();
+    TabSettingList* tabSettingList = new TabSettingList();
+    for (QList<OpenTab*>::const_iterator it = openTabs->begin(); it != openTabs->end(); ++it) {
+        tabSettingList->append(dynamic_cast<BrowserTab*>(*it)->tabSetting());
+    }
+    delete openTabs;
     TabSettings* tabSettings = new TabSettings();
-
+    tabSettings->set(tabSettingList);
     return tabSettings;
 }
 

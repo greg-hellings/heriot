@@ -59,49 +59,32 @@ void TabSetting::setChildren(const TabSettingList &children)
 /***********************
  * Trollolololol
  ***********************/
-TabSettings::TabSettings() :
-    tabSettingList(new TabSettingList())
-{}
+TabSettings::TabSettings()
+{
+    this->set(new TabSettingList());
+}
 
 TabSettings::TabSettings(const QString &document) :
-    QJsonDocument(QJsonDocument::fromJson(document.toUtf8())),
-    tabSettingList(new TabSettingList())
+    QJsonDocument(QJsonDocument::fromJson(document.toUtf8()))
 {
-    QJsonArray myArray = this->array();
-    for (QJsonArray::iterator it = myArray.begin(); it != myArray.end(); ++it) {
-        this->tabSettingList->append(new TabSetting((*it).toObject()));
-    }
 }
 
-TabSettings::~TabSettings()
-{
-    for (int i = this->tabSettingList->count(); i >= 0; --i) {
-        delete this->tabSettingList->takeAt(i);
-    }
-    delete this->tabSettingList;
-}
-
-void TabSettings::set(const TabSettingList &list)
+void TabSettings::set(const TabSettingList* list)
 {
     QJsonArray jsonArray;
-    for (TabSettingList::const_iterator it = list.begin(); it != list.end(); ++it) {
+    for (TabSettingList::const_iterator it = list->begin(); it != list->end(); ++it) {
         jsonArray.append(**it);
     }
     this->setArray(jsonArray);
-    this->tabSettingList = new TabSettingList(list);
 }
 
-void TabSettings::addSetting(TabSetting *setting)
+TabSettingList* TabSettings::get()
 {
-    this->tabSettingList->append(setting);
-}
-
-const TabSettingList* TabSettings::get()
-{
-    return this->tabSettingList;
+    // TODO: This
+    return new TabSettingList();
 }
 
 QString TabSettings::toString()
 {
-    return QString(QJsonDocument::toJson());
+    return QString(QJsonDocument::toJson(QJsonDocument::Compact));
 }

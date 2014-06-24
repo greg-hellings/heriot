@@ -2,6 +2,7 @@
 #include "src/ui/heriot/web/heriotwebview.h"
 #include "src/heriotapplication.h"
 #include "src/ui/heriot/web/webviewwrapper.h"
+#include "src/settings/tabsettings.h"
 
 #include <QTreeWidgetItem>
 
@@ -38,6 +39,18 @@ void BrowserTab::loadFinished(bool ok)
 HeriotWebView* BrowserTab::webView() const
 {
     return (dynamic_cast<WebViewWrapper*>(this->widget()))->webView();
+}
+
+TabSetting* BrowserTab::tabSetting() const
+{
+    TabSetting* tabSetting = new TabSetting();
+    tabSetting->setUrl(this->webView()->url().toString());
+    TabSettingList tabSettingList;
+    for (int i = 0; i < this->childCount(); ++i) {
+        tabSettingList.append((dynamic_cast<BrowserTab*>(this->child(i)))->tabSetting());
+    }
+    tabSetting->setChildren(tabSettingList);
+    return tabSetting;
 }
 
 void BrowserTab::titleChanged(const QString &title)

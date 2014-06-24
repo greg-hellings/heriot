@@ -2,6 +2,7 @@
 #define MAINTABS_H
 
 #include <QWidget>
+#include <QList>
 
 namespace Ui {
 class SideTabs;
@@ -25,6 +26,7 @@ public:
 
     OpenTab* currentTab() const;
     void setCurrentTab(OpenTab* tab);
+    QList<OpenTab*>* openTabs();
 signals:
     void tabChanged(OpenTab* oldTab, OpenTab* newTab);
     void closedTab(int topLevelTabsRemaining);

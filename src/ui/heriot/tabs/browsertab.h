@@ -5,6 +5,7 @@
 
 class WebViewWrapper;
 class HeriotWebView;
+class TabSetting;
 
 class BrowserTab : public OpenTab
 {
@@ -13,6 +14,7 @@ public:
     BrowserTab(QTreeWidget* parent, const QString& text, WebViewWrapper* view);
     BrowserTab(QTreeWidgetItem* parent, const QString& text, WebViewWrapper* view);
     HeriotWebView* webView() const;
+    TabSetting* tabSetting() const;
 signals:
 
 public slots:

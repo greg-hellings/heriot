@@ -29,14 +29,10 @@ class TabSettings : private QJsonDocument
 public:
     TabSettings(const QString& document);
     TabSettings();
-    ~TabSettings();
 
-    void set(const TabSettingList& list);
-    const TabSettingList* get();
-    void addSetting(TabSetting* setting);
+    void set(const TabSettingList* list);
+    TabSettingList* get();
     QString toString();
-private:
-    TabSettingList* tabSettingList;
 };
 
 #endif // TABSETTINGS_H
