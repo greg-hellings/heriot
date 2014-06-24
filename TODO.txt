@@ -7,6 +7,7 @@ v 0.1
 * Remove ugly blue selection bar for QTreeView
 * Auto-open Inspector if parent has open inspector
 * In-page search
+* Reload button/key-press
 
 v 0.2
 * Re-open closed tabs
@@ -21,6 +22,7 @@ v 0.3
 * NoScript-like action
 * AdBlock-lik action
 * Download file
+* Allow invalid SSL
 
 Default Icon from http://findicons.com/icon/32911/shield_security?id=33026 License: Freeware, Designer: Teekatas
 
