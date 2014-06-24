@@ -45,6 +45,13 @@ BrowserWindow::~BrowserWindow()
     delete ui;
 }
 
+void BrowserWindow::closeEvent(QCloseEvent *event)
+{
+    HeriotSettings::instance()->saveTabs(this->mainTabsWidget);
+    HeriotSettings::instance()->sync();
+    QMainWindow::closeEvent(event);
+}
+
 void BrowserWindow::keyPressEvent(QKeyEvent *event)
 {
     switch(event->key()) {

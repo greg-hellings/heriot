@@ -12,19 +12,15 @@ class HeriotSettings : public QSettings
 {
     Q_OBJECT
 public:
-    explicit HeriotSettings(QObject *parent = 0);
-    static HeriotSettings* instance() {
-        if (s_instance == NULL)
-            s_instance = new HeriotSettings();
+    static HeriotSettings* instance();
 
-        return s_instance;
-    }
+    void saveTabs(MainTabWidget* tabs);
 signals:
 
 public slots:
 
 private:
-    static HeriotSettings* s_instance;
+    explicit HeriotSettings(QObject *parent = 0);
 };
 
 #endif // HERIOTSETTINGS_H

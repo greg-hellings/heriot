@@ -20,6 +20,7 @@ public:
 
 protected:
     void keyPressEvent(QKeyEvent *);
+    void closeEvent(QCloseEvent *);
 
 public slots:
     void omniValueEntered();
