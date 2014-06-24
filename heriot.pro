@@ -48,4 +48,18 @@ OTHER_FILES += \
 RESOURCES += \
     data.qrc
 
-RC_ICONS = heriot.ico
+win32 {
+    RC_ICONS = heriot.ico
+}
+
+mac {
+    ICON = heriot.icns
+    QMAKE_INFO_PLIST = heriot.plist
+    TARGET = Heriot
+    contains(QT_CONFIG, x86) {
+        CONFIG -= x86_64
+        CONFIG += x86
+    }
+}
+
+INSTALLS += target
