@@ -6,27 +6,29 @@
 
 OpenTab::OpenTab(QTreeWidget* parent, const QString& text, QWidget* view) :
     QTreeWidgetItem(parent, QStringList(text)),
-    myWidget(view)
+    myWidget(view),
+    up(parent->invisibleRootItem())
 {
 }
 
 OpenTab::OpenTab(QTreeWidgetItem* parent, const QString& text, QWidget* view) :
     QTreeWidgetItem(parent, QStringList(text)),
-    myWidget(view)
+    myWidget(view),
+    up(parent)
 {
 }
 
-OpenTab* OpenTab::closestSibling(QTreeWidgetItem* closestRelative)
+OpenTab* OpenTab::closestSibling(QTreeWidgetItem* parent)
 {
     OpenTab* target = 0;
-    if (closestRelative->childCount() > 1) {
-        int myIndex = closestRelative->indexOfChild(this);
+    if (parent->childCount() > 1) {
+        int myIndex = parent->indexOfChild(this);
         // If this is not the oldest child, then choose the next oldest (above) child
         if (myIndex > 0) {
-            target = dynamic_cast<OpenTab*>(closestRelative->child(myIndex - 1));
+            target = dynamic_cast<OpenTab*>(parent->child(myIndex - 1));
         } else {
             // Otherwise, choose the second oldest child
-            target = dynamic_cast<OpenTab*>(closestRelative->child(1));
+            target = dynamic_cast<OpenTab*>(parent->child(1));
         }
     }
 
@@ -36,10 +38,6 @@ OpenTab* OpenTab::closestSibling(QTreeWidgetItem* closestRelative)
 OpenTab* OpenTab::removeSelf()
 {
     OpenTab* closestRelative = 0;
-    QTreeWidgetItem* parent = QTreeWidgetItem::parent();
-    if (parent == NULL) {
-        parent = this->treeWidget()->invisibleRootItem();
-    }
     // If this tab has children, the eldest child is the closest relative
     if (this->childCount() > 0) {
         closestRelative = dynamic_cast<OpenTab*>(this->takeChild(0));
@@ -47,18 +45,13 @@ OpenTab* OpenTab::removeSelf()
         closestRelative->addChildren(this->takeChildren());
         closestRelative->setExpanded(true);
         // And promote this to the parent
-        parent->insertChild(parent->indexOfChild(this), closestRelative);
+        this->up->insertChild(this->up->indexOfChild(this), closestRelative);
+        closestRelative->up = this->up;
     } else {
-        closestRelative = dynamic_cast<OpenTab*>(parent);
-        if (closestRelative != NULL) {
-            // If this tab was not alone, then the closest relative is one of its siblings
-            closestRelative = closestSibling(closestRelative);
-        } else {
-            closestRelative = closestSibling(parent);
-        }
+        closestRelative = closestSibling(this->up);
     }
     // Remove this one from its parent
-    parent->removeChild(this);
+    this->up->removeChild(this);
 
     return closestRelative;
 }
@@ -66,4 +59,12 @@ OpenTab* OpenTab::removeSelf()
 QWidget* OpenTab::widget() const
 {
     return this->myWidget;
+}
+
+void OpenTab::addChildren(const QList<QTreeWidgetItem *> &children)
+{
+    QTreeWidgetItem::addChildren(children);
+    for (QList<QTreeWidgetItem*>::const_iterator it = children.begin(); it != children.end(); ++it) {
+        (dynamic_cast<OpenTab*>(*it))->up = this;
+    }
 }

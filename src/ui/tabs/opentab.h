@@ -19,12 +19,14 @@ public:
     OpenTab* removeSelf();
 
     OpenTab* closestSibling(QTreeWidgetItem* closestRelative);
+    void addChildren(const QList<QTreeWidgetItem *> &children);
 signals:
 
 public slots:
 
 private:
     QWidget* myWidget;
+    QTreeWidgetItem* up;
 };
 
 #endif // OPENTAB_H

@@ -73,6 +73,7 @@ void SideTabs::closeCurrentTab()
         this->openTab = dynamic_cast<OpenTab*>(newCurrent);
         this->ui->tabs->clearSelection();
         this->openTab->setSelected(true);
+        this->openTab->setExpanded(true);
     }
     emit tabChanged(oldTab, dynamic_cast<OpenTab*>(newCurrent));
     emit closedTab(this->ui->tabs->invisibleRootItem()->childCount());
