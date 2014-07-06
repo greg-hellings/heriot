@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QVector>
+#include <QUuid>
 
 class MainTabWidget;
 
@@ -16,11 +17,15 @@ class BrowserWindow : public QMainWindow
 
 public:
     explicit BrowserWindow(QWidget *parent = 0);
+    explicit BrowserWindow(const QUuid& uuid, QWidget *parent = 0);
     ~BrowserWindow();
 
 protected:
     void keyPressEvent(QKeyEvent *);
     void closeEvent(QCloseEvent *);
+
+private:
+    void init();
 
 public slots:
     void omniValueEntered();
@@ -41,6 +46,7 @@ public slots:
 private:
     Ui::BrowserWindow *ui;
     MainTabWidget* mainTabsWidget;
+    QUuid uuid;
 };
 
 #endif // BROWSERWINDOW_H

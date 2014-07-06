@@ -10,10 +10,30 @@
 #include <QDockWidget>
 #include <QWebInspector>
 #include <QFileDialog>
+#include <QUuid>
 
 BrowserWindow::BrowserWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::BrowserWindow)
+{
+    this->uuid = QUuid::createUuid();
+    this->init();
+}
+
+BrowserWindow::BrowserWindow(const QUuid &uuid, QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::BrowserWindow)
+{
+    this->uuid = uuid;
+    this->init();
+}
+
+BrowserWindow::~BrowserWindow()
+{
+    delete ui;
+}
+
+void BrowserWindow::init()
 {
     this->ui->setupUi(this);
 
@@ -38,11 +58,6 @@ BrowserWindow::BrowserWindow(QWidget *parent) :
     this->connect(this->ui->actionClose_Tab, SIGNAL(triggered()), SLOT(onCloseCurrentTab()));
 
     this->setIconSize(QSize(16, 16));
-}
-
-BrowserWindow::~BrowserWindow()
-{
-    delete ui;
 }
 
 void BrowserWindow::closeEvent(QCloseEvent *event)
