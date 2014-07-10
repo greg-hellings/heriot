@@ -17,9 +17,10 @@ class BrowserWindow : public QMainWindow
 
 public:
     explicit BrowserWindow(QWidget *parent = 0);
-    explicit BrowserWindow(const QUuid& uuid, QWidget *parent = 0);
+    explicit BrowserWindow(const QString& uuid, QWidget *parent = 0);
     ~BrowserWindow();
 
+    const QUuid uuid() const;
 protected:
     void keyPressEvent(QKeyEvent *);
     void closeEvent(QCloseEvent *);
@@ -46,7 +47,7 @@ public slots:
 private:
     Ui::BrowserWindow *ui;
     MainTabWidget* mainTabsWidget;
-    QUuid uuid;
+    QUuid o_uuid;
 };
 
 #endif // BROWSERWINDOW_H

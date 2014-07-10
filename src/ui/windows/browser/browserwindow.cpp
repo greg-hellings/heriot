@@ -14,23 +14,28 @@
 
 BrowserWindow::BrowserWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::BrowserWindow)
+    ui(new Ui::BrowserWindow),
+    o_uuid(QUuid::createUuid())
 {
-    this->uuid = QUuid::createUuid();
     this->init();
 }
 
-BrowserWindow::BrowserWindow(const QUuid &uuid, QWidget *parent) :
+BrowserWindow::BrowserWindow(const QString& uuid, QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::BrowserWindow)
+    ui(new Ui::BrowserWindow),
+    o_uuid(uuid)
 {
-    this->uuid = uuid;
     this->init();
 }
 
 BrowserWindow::~BrowserWindow()
 {
-    delete ui;
+    delete this->ui;
+}
+
+const QUuid BrowserWindow::uuid() const
+{
+    return this->o_uuid;
 }
 
 void BrowserWindow::init()
@@ -62,8 +67,10 @@ void BrowserWindow::init()
 
 void BrowserWindow::closeEvent(QCloseEvent *event)
 {
-    HeriotSettings::instance()->saveTabs(this->mainTabsWidget);
-    HeriotSettings::instance()->sync();
+    HeriotSettings* settings = HeriotSettings::instance();
+    settings->saveTabs(this->uuid(), this->mainTabsWidget);
+    settings->saveWindow(this);
+    settings->sync();
     QMainWindow::closeEvent(event);
 }
 
