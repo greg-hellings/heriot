@@ -1,6 +1,7 @@
 #include "maintabwidget.h"
 
-#include <QWebHistory>
+#include <QWebEngineHistory>
+//#include <QWebSettings>
 
 #include "src/ui/heriot/web/heriotwebview.h"
 #include "src/ui/tabs/opentab.h"
@@ -29,12 +30,13 @@ void MainTabWidget::configureNewTab(OpenTab *newTab)
     this->connect(webView, SIGNAL(openNewTab(HeriotWebView*, HeriotWebView*)), SLOT(openNewTab(HeriotWebView*, HeriotWebView*)));
     // Some default settings to enable - doing it here, rather than in global in case we
     // want to allow different options per-tab or per-view in the future
-    QWebSettings* settings = webView->page()->settings();
-    settings->setAttribute(QWebSettings::PluginsEnabled, true);
-    settings->setAttribute(QWebSettings::JavascriptCanOpenWindows, true);
-    settings->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, true);
-    settings->setAttribute(QWebSettings::OfflineWebApplicationCacheEnabled, true);
-    settings->setAttribute(QWebSettings::LocalStorageEnabled, true);
+    /*QWebEngineSettings* settings = QWebEngineSettings::globalInstance();
+    settings->setAttribute(QWebEngineSettings::PluginsEnabled, true);
+    settings->setAttribute(QWebEngineSettings::JavascriptCanOpenWindows, true);
+    settings->setAttribute(QWebEngineSettings::OfflineStorageDatabaseEnabled, true);
+    settings->setAttribute(QWebEngineSettings::OfflineWebApplicationCacheEnabled, true);
+    settings->setAttribute(QWebEngineSettings::LocalStorageEnabled, true);
+    //*/
 }
 
 void MainTabWidget::setTabAddress(const QString& place)
@@ -98,7 +100,7 @@ HeriotWebView* MainTabWidget::getNewWebView(QWidget* parent)
     if (parent == 0 || parent == NULL)
         parent = this;
     HeriotWebView* webView = new HeriotWebView(this, parent);
-    webView->page()->networkAccessManager()->setCookieJar(this->cookieJar);
+    //webView->page()->networkAccessManager()->setCookieJar(this->cookieJar);
     this->cookieJar->setParent(this);
     return webView;
 }

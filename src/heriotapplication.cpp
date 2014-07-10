@@ -1,5 +1,6 @@
 #include "heriotapplication.h"
 
+#include <QWebEngineHistory>
 #include <QWebSettings>
 #include <QStandardPaths>
 #include <QDir>
@@ -41,10 +42,12 @@ void HeriotApplication::postLaunch()
         dir.mkpath(".");
     }
 
-    QWebSettings::enablePersistentStorage(directory);
-    QWebSettings* settings = QWebSettings::globalSettings();
-    settings->setAttribute(QWebSettings::DnsPrefetchEnabled, true);
-    settings->setThirdPartyCookiePolicy(QWebSettings::AllowThirdPartyWithExistingCookies);
+    /*
+    QWebEngineSettings::enablePersistentStorage(directory);
+    QWebEngineSettings* settings = QWebEngineSettings::globalSettings();
+    settings->setAttribute(QWebEngineSettings::DnsPrefetchEnabled, true);
+    settings->setThirdPartyCookiePolicy(QWebEngineSettings::AllowThirdPartyWithExistingCookies);
+    */
 
     this->connect(this, SIGNAL(aboutToQuit()), SLOT(closeAllWindows()));
 }

@@ -1,14 +1,14 @@
 #ifndef HERIOTWEBVIEW_H
 #define HERIOTWEBVIEW_H
 
-#include <QWebView>
+#include <QWebEngineView>
 
 class HeriotWebPage;
 class QWebInspector;
 class MainTabWidget;
 class WebViewWrapper;
 
-class HeriotWebView : public QWebView
+class HeriotWebView : public QWebEngineView
 {
     Q_OBJECT
 public:
@@ -18,7 +18,7 @@ public:
     void setWebViewWrapper(WebViewWrapper* wrapper);
 
 protected:
-    QWebView* createWindow(QWebPage::WebWindowType type);
+    QWebEngineView* createWindow(QWebEnginePage::WebWindowType type);
     void mousePressEvent(QMouseEvent* event);
     void contextMenuEvent(QContextMenuEvent *event);
     MainTabWidget* mainTabWidget() const;

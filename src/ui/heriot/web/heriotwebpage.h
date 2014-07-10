@@ -1,21 +1,22 @@
 #ifndef HERIOTWEBPAGE_H
 #define HERIOTWEBPAGE_H
 
-#include <QWebPage>
+#include <QWebEnginePage>
 
 #include "heriotwebview.h"
 
-class HeriotWebPage : public QWebPage
+class HeriotWebPage : public QWebEnginePage
 {
     Q_OBJECT
 public:
     explicit HeriotWebPage(QWidget *parent = 0);
 
-    bool acceptNavigationRequest(QWebFrame *frame, const QNetworkRequest &request, NavigationType type);
-
 signals:
 
 public slots:
+
+protected:
+    QWebEnginePage* createWindow(WebWindowType type);
 
 private:
     friend class HeriotWebView;

@@ -5,28 +5,22 @@
 #include "src/ui/heriot/tabs/browsertab.h"
 
 HeriotWebPage::HeriotWebPage(QWidget *parent) :
-    QWebPage(parent),
+    QWebEnginePage(parent),
     m_keyboardModifiers(Qt::NoModifier),
     m_pressedButtons(Qt::NoButton)
 {
 }
 
-bool HeriotWebPage::acceptNavigationRequest(QWebFrame *frame, const QNetworkRequest &request, NavigationType type)
+QWebEnginePage* HeriotWebPage::createWindow(WebWindowType type)
 {
-    // First we handle whether the user was requesting a specific opening
-    if (type == QWebPage::NavigationTypeLinkClicked && ( this->m_keyboardModifiers & Qt::ControlModifier || this->m_pressedButtons == Qt::MidButton ) ) {
-        QObject*        widget = this;
-        while(widget != NULL && !dynamic_cast<MainTabWidget*>(widget->parent())) {
-            widget = widget->parent();
-        }
-        if (widget != NULL) {
-            MainTabWidget* parent = dynamic_cast<MainTabWidget*>(widget->parent());
-            BrowserTab* tab = dynamic_cast<BrowserTab*>(parent->newTab(parent->getNewWebView(), true, false));
-            HeriotWebView* webView = tab->webView();
-            webView->load(request);
-
-            return false;
-        }
+    QObject*        widget = this;
+    while(widget != NULL && !dynamic_cast<MainTabWidget*>(widget->parent())) {
+        widget = widget->parent();
     }
-    return QWebPage::acceptNavigationRequest(frame, request, type);
+    if (widget != NULL) {
+        MainTabWidget* parent = dynamic_cast<MainTabWidget*>(widget->parent());
+        BrowserTab* tab = dynamic_cast<BrowserTab*>(parent->newTab(parent->getNewWebView(), true, false));
+        return tab->webView()->page();
+    }
+    return NULL;
 }
