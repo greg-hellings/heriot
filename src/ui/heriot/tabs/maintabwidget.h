@@ -7,6 +7,8 @@
 class HeriotWebView;
 class QWebInspector;
 class CookieJar;
+class TabSettings;
+class TabSetting;
 
 class MainTabWidget : public SideTabs
 {
@@ -19,6 +21,8 @@ public:
     void navigatePaneForward();
     HeriotWebView* getNewWebView(QWidget* parent = 0);
     TabSettings* getTabSettings();
+    void restoreTabSettings(TabSettings* tabSettings);
+
 signals:
     void tabAddressUpdated(const QString& address);
     void tabTitleUpdated(const QString& title);
@@ -36,6 +40,7 @@ private:
     HeriotWebView* currentWebView();
     CookieJar* cookieJar;
 
+    void restoreTabSettings(const TabSetting& setting, const OpenTab* parent = 0);
 protected:
     void configureNewTab(OpenTab *newTab);
     OpenTab* getNewOpenTab(QWidget* content, QTreeWidgetItem* parent);

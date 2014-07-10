@@ -5,7 +5,8 @@
 #include <QUuid>
 
 const QString HeriotSettings::tabs = "tabs";
-const QString HeriotSettings::geometry = "geometry";
+const QString HeriotSettings::position = "position";
+const QString HeriotSettings::size = "size";
 const QString HeriotSettings::windows = "windows";
 
 HeriotSettings::HeriotSettings(QObject *parent) :
@@ -25,14 +26,24 @@ QString HeriotSettings::getTabs(const QUuid& uuid)
 
 void HeriotSettings::saveWindow(const BrowserWindow* window)
 {
-    this->setWindowSetting(window->uuid(), HeriotSettings::geometry, window->saveGeometry());
+    this->setWindowSetting(window->uuid(), HeriotSettings::position, window->pos());
+    this->setWindowSetting(window->uuid(), HeriotSettings::size, window->size());
 }
 
 void HeriotSettings::getWindow(BrowserWindow* window) {
-    window->restoreGeometry(this->getWindowSetting(window->uuid(), HeriotSettings::geometry).toByteArray());
+    window->move(this->getWindowSetting(window->uuid(), HeriotSettings::position).toPoint());
+    window->resize(this->getWindowSetting(window->uuid(), HeriotSettings::size).toSize());
 }
 
-void HeriotSettings::setWindowSetting(const QUuid &uuid, const QString &name, const QString &value)
+QStringList HeriotSettings::getWindows()
+{
+    this->beginGroup(HeriotSettings::windows);
+    QStringList childGroups = this->childGroups();
+    this->endGroup();
+    return childGroups;
+}
+
+void HeriotSettings::setWindowSetting(const QUuid &uuid, const QString &name, const QVariant &value)
 {
     this->beginGroup(HeriotSettings::windows);
     this->beginGroup(uuid.toString());
@@ -41,7 +52,7 @@ void HeriotSettings::setWindowSetting(const QUuid &uuid, const QString &name, co
     this->endGroup();
 }
 
-QVariant HeriotSettings::getWindowSetting(const QUuid &uuid, const QString &name, const QString &defaultValue)
+QVariant HeriotSettings::getWindowSetting(const QUuid &uuid, const QString &name, const QVariant &defaultValue)
 {
     this->beginGroup(HeriotSettings::windows);
     this->beginGroup(uuid.toString());

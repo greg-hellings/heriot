@@ -33,6 +33,9 @@ public:
     void set(const TabSettingList* list);
     TabSettingList* get();
     QString toString();
+
+private:
+    QJsonDocument* document;
 };
 
 #endif // TABSETTINGS_H

@@ -26,6 +26,8 @@ BrowserWindow::BrowserWindow(const QString& uuid, QWidget *parent) :
     o_uuid(uuid)
 {
     this->init();
+    HeriotSettings::instance()->getWindow(this);
+    this->mainTabsWidget->restoreTabSettings(new TabSettings(HeriotSettings::instance()->getTabs(this->o_uuid)));
 }
 
 BrowserWindow::~BrowserWindow()

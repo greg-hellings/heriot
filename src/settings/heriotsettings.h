@@ -4,6 +4,7 @@
 #include <QSettings>
 #include <QMap>
 #include <QList>
+#include <QStringList>
 #include "tabsettings.h"
 
 class MainTabWidget;
@@ -21,17 +22,20 @@ public:
 
     void saveWindow(const BrowserWindow* window);
     void getWindow(BrowserWindow* window);
+
+    QStringList getWindows();
 signals:
 
 public slots:
 
 private:
     explicit HeriotSettings(QObject *parent = 0);
-    void setWindowSetting(const QUuid& uuid, const QString& name, const QString& value = "");
-    QVariant getWindowSetting(const QUuid& uuid, const QString& name, const QString& defaultValue = "");
+    void setWindowSetting(const QUuid& uuid, const QString& name, const QVariant& value = "");
+    QVariant getWindowSetting(const QUuid& uuid, const QString& name, const QVariant& defaultValue = "");
 
     static const QString tabs;
-    static const QString geometry;
+    static const QString position;
+    static const QString size;
     static const QString windows;
 };
 

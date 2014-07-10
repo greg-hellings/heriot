@@ -80,8 +80,13 @@ void TabSettings::set(const TabSettingList* list)
 
 TabSettingList* TabSettings::get()
 {
-    // TODO: This
-    return new TabSettingList();
+    TabSettingList* list = new TabSettingList();
+    QJsonArray array = this->array();
+    for (int i = 0; i < array.size(); ++i) {
+        list->append(new TabSetting(array.at(i).toObject()));
+    }
+
+    return list;
 }
 
 QString TabSettings::toString()

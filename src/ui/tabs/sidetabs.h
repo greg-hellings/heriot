@@ -22,7 +22,7 @@ public:
     OpenTab* newTab(QWidget* widget, bool childOfActive = false, bool displayNow = true);
     OpenTab* newTab(QWidget* widget, QWidget* parent, bool displayNow = true);
 
-    void closeCurrentTab();
+    void closeCurrentTab(bool suppressSignals = false);
 
     OpenTab* currentTab() const;
     void setCurrentTab(OpenTab* tab);

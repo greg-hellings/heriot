@@ -7,6 +7,7 @@
 #include "browsertab.h"
 #include "src/ui/heriot/web/webviewwrapper.h"
 #include "src/web/cookiejar.h"
+#include "src/settings/tabsettings.h"
 
 MainTabWidget::MainTabWidget(QWidget *parent) :
     SideTabs(parent),
@@ -113,6 +114,37 @@ TabSettings* MainTabWidget::getTabSettings()
     TabSettings* tabSettings = new TabSettings();
     tabSettings->set(tabSettingList);
     return tabSettings;
+}
+
+void MainTabWidget::restoreTabSettings(TabSettings *tabSettings)
+{
+    TabSettingList* list = tabSettings->get();
+    if (list->size() == 0)
+        return;
+    this->closeCurrentTab(true);
+    for (TabSettingList::const_iterator it = list->begin(); it != list->end(); ++it) {
+        this->restoreTabSettings(**it);
+    }
+}
+
+void MainTabWidget::restoreTabSettings(const TabSetting &setting, const OpenTab* parent)
+{
+    // Create self and add to tab
+    HeriotWebView* view;
+    OpenTab* self;
+    if (parent != NULL) {
+        view = this->getNewWebView(parent->widget());
+        self = this->newTab(view, parent->widget());
+    } else {
+        view = this->getNewWebView();
+        self = this->newTab(view);
+    }
+    view->setUrl(setting.url());
+    TabSettingList* list = setting.children();
+    for (TabSettingList::const_iterator it = list->begin(); it != list->end(); ++it) {
+        this->restoreTabSettings(**it, self);
+    }
+    self->setExpanded(true);
 }
 
 void MainTabWidget::navigatePaneBack()

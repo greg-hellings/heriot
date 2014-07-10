@@ -38,7 +38,11 @@ void BrowserTab::loadFinished(bool ok)
 
 HeriotWebView* BrowserTab::webView() const
 {
-    return (dynamic_cast<WebViewWrapper*>(this->widget()))->webView();
+    WebViewWrapper* wrapper = dynamic_cast<WebViewWrapper*>(this->widget());
+    if (wrapper != NULL)
+        return wrapper->webView();
+    else
+        return NULL;
 }
 
 TabSetting* BrowserTab::tabSetting() const
@@ -60,7 +64,9 @@ void BrowserTab::titleChanged(const QString &title)
 
 void BrowserTab::iconChanged()
 {
-    QIcon icon = HeriotApplication::instance()->icon(this->webView()->url());
+    if (this->webView() != NULL) {
+        QIcon icon = HeriotApplication::instance()->icon(this->webView()->url());
 
-    this->setIcon(0, icon);
+        this->setIcon(0, icon);
+    }
 }

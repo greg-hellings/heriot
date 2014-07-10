@@ -61,7 +61,7 @@ OpenTab* SideTabs::newTab(QWidget *widget, QWidget *parent, bool displayNow)
     return tab;
 }
 
-void SideTabs::closeCurrentTab()
+void SideTabs::closeCurrentTab(bool suppressSignals)
 {
     OpenTab* oldTab = this->openTab;
     // Remove the webview from the stack
@@ -75,8 +75,10 @@ void SideTabs::closeCurrentTab()
         this->openTab->setSelected(true);
         this->openTab->setExpanded(true);
     }
-    emit tabChanged(oldTab, dynamic_cast<OpenTab*>(newCurrent));
-    emit closedTab(this->ui->tabs->invisibleRootItem()->childCount());
+    if (!suppressSignals) {
+        emit tabChanged(oldTab, dynamic_cast<OpenTab*>(newCurrent));
+        emit closedTab(this->ui->tabs->invisibleRootItem()->childCount());
+    }
 }
 
 void SideTabs::configureNewTab(OpenTab* newTab)
