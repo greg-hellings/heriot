@@ -1,9 +1,5 @@
 TODOs:
-v 0.0.1
-
 v 0.1
-* Enable to-disk persistence for things like cookies, etc.
-* Persist tabs between sessions
 * Remove ugly blue selection bar for QTreeView
 * Auto-open Inspector if parent has open inspector
 * In-page search
@@ -20,9 +16,12 @@ v 0.2
 v 0.3
 * Settings
 * NoScript-like action
-* AdBlock-lik action
+* AdBlock-like action
 * Download file
 * Allow invalid SSL
+
+Comes for Free with QWebEngine:
+* Enable to-disk persistence for things like cookies, etc.
 
 Default Icon from http://findicons.com/icon/32911/shield_security?id=33026 License: Freeware, Designer: Teekatas
 
@@ -31,6 +30,7 @@ v 0.1
 * Auto-select omnibar text when Ctrl-L
 * Auto-expand tabs with new children
 * Open from file
+* Persist tabs between sessions
 
 v 0.0.1
 * Basic tree tabs
