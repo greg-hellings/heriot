@@ -3,7 +3,6 @@ v 0.0.1
 
 v 0.1
 * Enable to-disk persistence for things like cookies, etc.
-* Persist tabs between sessions
 * Remove ugly blue selection bar for QTreeView
 * Auto-open Inspector if parent has open inspector
 * In-page search
@@ -31,6 +30,7 @@ v 0.1
 * Auto-select omnibar text when Ctrl-L
 * Auto-expand tabs with new children
 * Open from file
+* Persist tabs between sessions
 
 v 0.0.1
 * Basic tree tabs
