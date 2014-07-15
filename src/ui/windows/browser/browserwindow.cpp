@@ -71,6 +71,7 @@ void BrowserWindow::init()
 void BrowserWindow::closeEvent(QCloseEvent *event)
 {
     HeriotSettings* settings = HeriotSettings::instance();
+    settings->clearTabs();
     settings->saveTabs(this->uuid(), this->mainTabsWidget);
     settings->saveWindow(this);
     settings->sync();
