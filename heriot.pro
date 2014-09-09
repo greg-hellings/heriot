@@ -4,9 +4,14 @@
 #
 #-------------------------------------------------
 
-QT       += core gui webkit webengine webenginewidgets
+QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets webkitwidgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets webkit webkitwidgets
+
+greaterThan(QT_VERSION, 5.4) {
+    QT -= webkit webkitwidgets
+    QT += webengine webenginewidgets
+}
 
 TARGET = heriot
 TEMPLATE = app

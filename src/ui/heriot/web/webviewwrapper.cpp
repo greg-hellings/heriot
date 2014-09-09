@@ -1,7 +1,6 @@
 #include "webviewwrapper.h"
 #include "heriotwebview.h"
 #include <QSplitter>
-#include <QWebInspector>
 #include <QGridLayout>
 
 WebViewWrapper::WebViewWrapper(QWidget *parent) :
@@ -20,22 +19,22 @@ void WebViewWrapper::addWebView(HeriotWebView *view)
 {
     this->o_webView = view;
     this->splitter->insertWidget(0, view);
-    this->addWebInspector(view->webInspector());
+//    this->addWebInspector(view->webInspector());
     view->setWebViewWrapper(this);
 }
 
-void WebViewWrapper::addWebInspector(QWebInspector *inspector)
-{
-    this->o_webInspector = inspector;
-    this->splitter->insertWidget(1, inspector);
-}
+//void WebViewWrapper::addWebInspector(QWebInspector *inspector)
+//{
+//    this->o_webInspector = inspector;
+//    this->splitter->insertWidget(1, inspector);
+//}
 
 HeriotWebView* WebViewWrapper::webView() const
 {
     return this->o_webView;
 }
 
-QWebInspector* WebViewWrapper::webInspector() const
-{
-    return this->o_webInspector;
-}
+//QWebInspector* WebViewWrapper::webInspector() const
+//{
+//    return this->o_webInspector;
+//}

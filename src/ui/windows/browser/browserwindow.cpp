@@ -4,11 +4,10 @@
 #include "src/heriotapplication.h"
 #include "src/ui/heriot/web/heriotwebview.h"
 
-#include <QWebView>
+#include <QWebEngineView>
 #include <QTabWidget>
 #include <QKeyEvent>
 #include <QDockWidget>
-#include <QWebInspector>
 #include <QFileDialog>
 #include <QUuid>
 

@@ -1,7 +1,7 @@
 #include "heriotapplication.h"
 
 #include <QWebEngineHistory>
-#include <QWebSettings>
+#include <QWebEngineSettings>
 #include <QStandardPaths>
 #include <QDir>
 #include <QTimer>
@@ -23,9 +23,9 @@ HeriotApplication* HeriotApplication::instance()
 
 QIcon HeriotApplication::icon(const QUrl &url)
 {
-    QIcon icon = QWebSettings::iconForUrl(url);
-    if (!icon.isNull())
-        return icon.pixmap(16, 16);
+//    QIcon icon = QWebEngineSettings::iconForUrl(url);
+//    if (!icon.isNull())
+//        return icon.pixmap(16, 16);
     if (this->defaultIcon.isNull())
         this->defaultIcon = QIcon(QString(":heriot.ico"));
     return this->defaultIcon.pixmap(16, 16);
@@ -41,13 +41,6 @@ void HeriotApplication::postLaunch()
     if (!dir.exists()) {
         dir.mkpath(".");
     }
-
-    /*
-    QWebEngineSettings::enablePersistentStorage(directory);
-    QWebEngineSettings* settings = QWebEngineSettings::globalSettings();
-    settings->setAttribute(QWebEngineSettings::DnsPrefetchEnabled, true);
-    settings->setThirdPartyCookiePolicy(QWebEngineSettings::AllowThirdPartyWithExistingCookies);
-    */
 
     this->connect(this, SIGNAL(aboutToQuit()), SLOT(closeAllWindows()));
 }

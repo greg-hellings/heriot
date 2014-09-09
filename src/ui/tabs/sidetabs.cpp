@@ -6,7 +6,7 @@
 
 #include <QItemSelectionModel>
 #include <QSizePolicy>
-#include <QWebHistory>
+#include <QWebEngineHistory>
 
 SideTabs::SideTabs(QWidget *parent) :
     QWidget(parent),
