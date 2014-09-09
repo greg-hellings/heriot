@@ -19,6 +19,7 @@ public:
 
     void navigatePaneBack();
     void navigatePaneForward();
+    void refreshPane();
     HeriotWebView* getNewWebView(QWidget* parent = 0);
     TabSettings* getTabSettings();
     void restoreTabSettings(TabSettings* tabSettings);

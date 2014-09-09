@@ -60,6 +60,7 @@ void BrowserWindow::init()
 
     this->connect(this->ui->backButton, SIGNAL(clicked(bool)), SLOT(backNavigation(bool)));
     this->connect(this->ui->forwardButton, SIGNAL(clicked(bool)), SLOT(forwardNavigation(bool)));
+    this->connect(this->ui->refreshButton, SIGNAL(clicked(bool)), SLOT(refresh()));
 
     this->connect(this->ui->actionClose_Tab, SIGNAL(triggered()), SLOT(onCloseCurrentTab()));
 
@@ -69,6 +70,7 @@ void BrowserWindow::init()
 void BrowserWindow::closeEvent(QCloseEvent *event)
 {
     HeriotSettings* settings = HeriotSettings::instance();
+    settings->clearTabs();
     settings->saveTabs(this->uuid(), this->mainTabsWidget);
     settings->saveWindow(this);
     settings->sync();
@@ -84,6 +86,11 @@ void BrowserWindow::keyPressEvent(QKeyEvent *event)
             this->ui->omniBox->selectAll();
         }
         event->ignore();
+        break;
+    case Qt::Key_F:
+        if (event->modifiers() & Qt::ControlModifier) {
+//            this->mainTabsWidget->currentWebView()->findText("a");
+        }
         break;
     default:
         QMainWindow::keyPressEvent(event);
@@ -130,6 +137,11 @@ void BrowserWindow::backNavigation(bool)
 void BrowserWindow::forwardNavigation(bool)
 {
     this->mainTabsWidget->navigatePaneForward();
+}
+
+void BrowserWindow::refresh()
+{
+    this->mainTabsWidget->refreshPane();
 }
 
 void BrowserWindow::quit()

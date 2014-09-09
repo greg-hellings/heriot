@@ -159,6 +159,11 @@ void MainTabWidget::navigatePaneForward()
     this->currentWebView()->page()->history()->forward();
 }
 
+void MainTabWidget::refreshPane()
+{
+    this->currentWebView()->reload();
+}
+
 void MainTabWidget::urlChanged(const QUrl &url)
 {
     emit tabAddressUpdated(url.toString());
