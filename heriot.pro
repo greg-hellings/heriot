@@ -56,7 +56,7 @@ mac {
     ICON = heriot.icns
     QMAKE_INFO_PLIST = heriot.plist
     TARGET = Heriot
-    contains(QT_CONFIG, x86) {
+    contains(QT_CONFIG, x86_64) {
         CONFIG -= x86_64
         CONFIG += x86
     }

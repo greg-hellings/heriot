@@ -11,6 +11,7 @@ v 0.2
 * Close/undock inspector
 * Animated loading icon
 * Omnibar Search
+* Prevent tab-switch from clearing inspector
 
 v 0.3
 * Settings
