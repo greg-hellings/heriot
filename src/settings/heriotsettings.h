@@ -19,6 +19,7 @@ public:
 
     void saveTabs(const QUuid& uuid, MainTabWidget* tabs);
     QString getTabs(const QUuid& uuid);
+    void clearTabs();
 
     void saveWindow(const BrowserWindow* window);
     void getWindow(BrowserWindow* window);

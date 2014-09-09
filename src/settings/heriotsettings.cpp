@@ -24,6 +24,13 @@ QString HeriotSettings::getTabs(const QUuid& uuid)
     return this->getWindowSetting(uuid, HeriotSettings::tabs, "[]").toString();
 }
 
+void HeriotSettings::clearTabs()
+{
+    this->beginGroup(HeriotSettings::windows);
+    this->remove("");
+    this->endGroup();
+}
+
 void HeriotSettings::saveWindow(const BrowserWindow* window)
 {
     this->setWindowSetting(window->uuid(), HeriotSettings::position, window->pos());

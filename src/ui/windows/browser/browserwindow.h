@@ -32,6 +32,7 @@ public slots:
     void omniValueEntered();
     void backNavigation(bool);
     void forwardNavigation(bool);
+    void refresh();
     void quit();
     void currentTabAddressChanged(const QString& address);
     void iconChanged(const QString& address);
