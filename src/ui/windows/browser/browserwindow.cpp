@@ -88,6 +88,11 @@ void BrowserWindow::keyPressEvent(QKeyEvent *event)
         }
         event->ignore();
         break;
+    case Qt::Key_F:
+        if (event->modifiers() & Qt::ControlModifier) {
+//            this->mainTabsWidget->currentWebView()->findText("a");
+        }
+        break;
     default:
         QMainWindow::keyPressEvent(event);
     }
