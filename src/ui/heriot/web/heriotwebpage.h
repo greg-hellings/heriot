@@ -16,7 +16,7 @@ signals:
 public slots:
 
 protected:
-    QWebEnginePage* createWindow(WebWindowType type);
+//    QWebEnginePage* createWindow(WebWindowType type);
 
 private:
     friend class HeriotWebView;

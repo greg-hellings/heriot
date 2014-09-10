@@ -1,14 +1,14 @@
 #include "src/ui/windows/browser/browserwindow.h"
 #include "src/settings/heriotsettings.h"
 #include <QApplication>
-#include <QWebEngine>
+#include <QtWebEngine>
 #include "heriotapplication.h"
 
 int main(int argc, char *argv[])
 {
     HeriotApplication a(argc, argv);
 
-    QWebEngine::initialize();
+    QtWebEngine::initialize();
     QStringList list = HeriotSettings::instance()->getWindows();
     BrowserWindow* window;
     for (QStringList::const_iterator it = list.begin(); it != list.end(); ++it) {

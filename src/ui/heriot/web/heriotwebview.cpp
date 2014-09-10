@@ -1,9 +1,9 @@
 #include "heriotwebview.h"
 
 #include <QMouseEvent>
-#include <QWebInspector>
+//#include <QWebInspector>
 #include <QMenu>
-#include <QWebSettings>
+#include <QtWebEngine>
 #include <QDockWidget>
 
 #include "heriotwebpage.h"
@@ -16,10 +16,10 @@ HeriotWebView::HeriotWebView(MainTabWidget* tabs, QWidget *parent) :
 {
     this->myPage = new HeriotWebPage(this);
     this->setPage(this->myPage);
-    this->myInspector = new QWebInspector(this);
+//    this->myInspector = new QWebInspector(this);
 //    this->myInspector->setPage(this->myPage);
-    this->myInspector->setVisible(true);
-    this->myInspector->hide();
+//    this->myInspector->setVisible(true);
+//    this->myInspector->hide();
 }
 
 QWebInspector* HeriotWebView::webInspector() const
@@ -66,14 +66,14 @@ void HeriotWebView::contextMenuEvent(QContextMenuEvent *event)
     QMenu* menu = this->myPage->createStandardContextMenu();
     menu->move(event->globalX(), event->globalY());
 //    menu->removeAction(this->pageAction(QWebEnginePage::InspectElement));
-    menu->addAction("Inspect", this, SLOT(inspect()));
+//    menu->addAction("Inspect", this, SLOT(inspect()));
     menu->setVisible(true);
 }
 
 void HeriotWebView::inspect()
 {
 //    this->myPage->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
-    this->myInspector->show();
+//    this->myInspector->show();
 
-    emit openInspector(this->myInspector);
+//    emit openInspector(this->myInspector);
 }

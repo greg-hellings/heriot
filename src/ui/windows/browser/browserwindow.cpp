@@ -4,11 +4,10 @@
 #include "src/heriotapplication.h"
 #include "src/ui/heriot/web/heriotwebview.h"
 
-#include <QWebView>
+#include <QWebEngineView>
 #include <QTabWidget>
 #include <QKeyEvent>
 #include <QDockWidget>
-#include <QWebInspector>
 #include <QFileDialog>
 #include <QUuid>
 
@@ -87,6 +86,11 @@ void BrowserWindow::keyPressEvent(QKeyEvent *event)
             this->ui->omniBox->selectAll();
         }
         event->ignore();
+        break;
+    case Qt::Key_F:
+        if (event->modifiers() & Qt::ControlModifier) {
+//            this->mainTabsWidget->currentWebView()->findText("a");
+        }
         break;
     default:
         QMainWindow::keyPressEvent(event);
