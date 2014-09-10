@@ -16,10 +16,8 @@ public:
     ~WebViewWrapper();
 
     void addWebView(HeriotWebView* view);
-//    void addWebInspector(QWebInspector* inspector);
 
     HeriotWebView* webView() const;
-//    QWebInspector* webInspector() const;
 signals:
 
 public slots:
@@ -34,7 +32,6 @@ private:
 
     QSplitter* splitter;
     HeriotWebView* o_webView;
-//    QWebInspector* o_webInspector;
     QWidget* o_searchView;
     QLineEdit* o_searchLineEdit;
 };

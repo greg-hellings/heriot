@@ -16,7 +16,7 @@ signals:
 public slots:
 
 protected:
-//    QWebEnginePage* createWindow(WebWindowType type);
+    bool certificateError(const QWebEngineCertificateError &certificateError) override;
 
 private:
     friend class HeriotWebView;

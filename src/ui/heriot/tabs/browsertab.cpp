@@ -22,7 +22,7 @@ void BrowserTab::bind(const HeriotWebView *view)
 {
     QObject::connect(dynamic_cast<const QObject*>(view), SIGNAL(loadFinished(bool)), dynamic_cast<const QObject*>(this), SLOT(loadFinished(bool)));
     this->connect(view, SIGNAL(titleChanged(QString)), SLOT(titleChanged(QString)));
-    this->connect(view, SIGNAL(iconChanged()), SLOT(iconChanged()));
+    this->connect(view, SIGNAL(iconUrlChanged(QUrl)), SLOT(iconChanged(QUrl)));
     this->connect(view, SIGNAL(loadFinished(bool)), SLOT(iconChanged()));
     this->connect(view, SIGNAL(loadStarted()), SLOT(iconChanged()));
 }
@@ -62,11 +62,16 @@ void BrowserTab::titleChanged(const QString &title)
     this->setText(0, title);
 }
 
-void BrowserTab::iconChanged()
+void BrowserTab::iconChanged(const QUrl& url)
 {
     if (this->webView() != NULL) {
         QIcon icon = HeriotApplication::instance()->icon(this->webView()->url());
 
         this->setIcon(0, icon);
     }
+}
+
+void BrowserTab::iconChanged()
+{
+   this->iconChanged(this->webView()->url());
 }

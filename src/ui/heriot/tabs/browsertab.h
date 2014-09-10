@@ -20,6 +20,7 @@ signals:
 public slots:
     void loadFinished(bool ok);
     void titleChanged(const QString& title);
+    void iconChanged(const QUrl& url);
     void iconChanged();
 
 private:

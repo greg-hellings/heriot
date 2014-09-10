@@ -1,7 +1,7 @@
 #include "src/ui/windows/browser/browserwindow.h"
 #include "src/settings/heriotsettings.h"
 #include <QApplication>
-#include <QtWebEngine>
+#include <QtWebEngine/QtWebEngine>
 #include "heriotapplication.h"
 
 int main(int argc, char *argv[])

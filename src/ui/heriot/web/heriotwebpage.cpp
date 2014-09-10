@@ -11,16 +11,7 @@ HeriotWebPage::HeriotWebPage(QWidget *parent) :
 {
 }
 
-//QWebEnginePage* HeriotWebPage::createWindow(WebWindowType type)
-//{
-//    QObject*        widget = this;
-//    while(widget != NULL && !dynamic_cast<MainTabWidget*>(widget->parent())) {
-//        widget = widget->parent();
-//    }
-//    if (widget != NULL) {
-//        MainTabWidget* parent = dynamic_cast<MainTabWidget*>(widget->parent());
-//        BrowserTab* tab = dynamic_cast<BrowserTab*>(parent->newTab(parent->getNewWebView(), true, false));
-//        return tab->webView()->page();
-//    }
-//    return NULL;
-//}
+bool HeriotWebPage::certificateError(const QWebEngineCertificateError &certificateError)
+{
+    return true;
+}

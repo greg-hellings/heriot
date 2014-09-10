@@ -32,14 +32,13 @@ signals:
 public slots:
     void urlChanged(const QUrl& url);
     void titleChanged(const QString& title);
-    void iconChanged();
+    void iconChanged(const QUrl& url);
     void openNewTab(HeriotWebView *child, HeriotWebView* parent);
     void tabChanged(OpenTab* newTab, OpenTab* oldTab);
     void tabClosing(int remainingTabs);
 
 private:
     HeriotWebView* currentWebView();
-    CookieJar* cookieJar;
 
     void restoreTabSettings(const TabSetting& setting, const OpenTab* parent = 0);
 protected:

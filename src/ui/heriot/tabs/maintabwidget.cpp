@@ -1,18 +1,16 @@
 #include "maintabwidget.h"
 
 #include <QWebEngineHistory>
-//#include <QWebSettings>
+#include <QWebEngineSettings>
 
 #include "src/ui/heriot/web/heriotwebview.h"
 #include "src/ui/tabs/opentab.h"
 #include "browsertab.h"
 #include "src/ui/heriot/web/webviewwrapper.h"
-#include "src/web/cookiejar.h"
 #include "src/settings/tabsettings.h"
 
 MainTabWidget::MainTabWidget(QWidget *parent) :
-    SideTabs(parent),
-    cookieJar(new CookieJar())
+    SideTabs(parent)
 {
     OpenTab* first = this->newTab(this->getNewWebView(), false, true);
     this->setTabAddress("http://www.google.com");
@@ -30,13 +28,11 @@ void MainTabWidget::configureNewTab(OpenTab *newTab)
     this->connect(webView, SIGNAL(openNewTab(HeriotWebView*, HeriotWebView*)), SLOT(openNewTab(HeriotWebView*, HeriotWebView*)));
     // Some default settings to enable - doing it here, rather than in global in case we
     // want to allow different options per-tab or per-view in the future
-    /*QWebEngineSettings* settings = QWebEngineSettings::globalInstance();
-    settings->setAttribute(QWebEngineSettings::PluginsEnabled, true);
+    QWebEngineSettings* settings = webView->page()->settings();
+    settings->setAttribute(QWebEngineSettings::JavascriptCanAccessClipboard, true);
     settings->setAttribute(QWebEngineSettings::JavascriptCanOpenWindows, true);
-    settings->setAttribute(QWebEngineSettings::OfflineStorageDatabaseEnabled, true);
-    settings->setAttribute(QWebEngineSettings::OfflineWebApplicationCacheEnabled, true);
+    settings->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
     settings->setAttribute(QWebEngineSettings::LocalStorageEnabled, true);
-    //*/
 }
 
 void MainTabWidget::setTabAddress(const QString& place)
@@ -65,19 +61,17 @@ void MainTabWidget::tabChanged(OpenTab* oldTab, OpenTab* newTab)
     if (current != NULL) {
         this->disconnect(current, SIGNAL(urlChanged(QUrl)), this, SLOT(urlChanged(QUrl)));
         this->disconnect(current, SIGNAL(titleChanged(QString)), this, SLOT(titleChanged(QString)));
-        this->disconnect(current, SIGNAL(iconChanged()), this, SLOT(iconChanged()));
-        this->disconnect(current, SIGNAL(urlChanged(QUrl)), this, SLOT(iconChanged()));
+        this->disconnect(current, SIGNAL(iconUrlChanged(QUrl)), this, SLOT(iconChanged(QUrl)));
     }
 
     if (webView != NULL) {
         this->connect(webView, SIGNAL(urlChanged(QUrl)), SLOT(urlChanged(QUrl)));
         this->connect(webView, SIGNAL(titleChanged(QString)), SLOT(titleChanged(QString)));
-        this->connect(webView, SIGNAL(iconChanged()), SLOT(iconChanged()));
-        this->connect(webView, SIGNAL(urlChanged(QUrl)), SLOT(iconChanged()));
+        this->connect(webView, SIGNAL(iconUrlChanged(QUrl)), SLOT(iconChanged(QUrl)));
 
         this->titleChanged(webView->title());
         this->urlChanged(webView->url());
-        this->iconChanged();
+        this->iconChanged(webView->url());
     }
 }
 
@@ -100,8 +94,6 @@ HeriotWebView* MainTabWidget::getNewWebView(QWidget* parent)
     if (parent == 0 || parent == NULL)
         parent = this;
     HeriotWebView* webView = new HeriotWebView(this, parent);
-    //webView->page()->networkAccessManager()->setCookieJar(this->cookieJar);
-    this->cookieJar->setParent(this);
     return webView;
 }
 
@@ -174,9 +166,9 @@ void MainTabWidget::titleChanged(const QString &title)
     emit tabTitleUpdated(title);
 }
 
-void MainTabWidget::iconChanged()
+void MainTabWidget::iconChanged(const QUrl& url)
 {
-    emit iconChanged(this->currentWebView()->url().toString());
+    emit iconChanged(url.toString());
 }
 
 void MainTabWidget::openNewTab(HeriotWebView *child, HeriotWebView* parent)

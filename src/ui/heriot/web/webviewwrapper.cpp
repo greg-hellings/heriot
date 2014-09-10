@@ -31,14 +31,8 @@ void WebViewWrapper::addWebView(HeriotWebView *view)
     this->o_webView = view;
     this->splitter->insertWidget(WEB_VIEW_INDEX, view);
     this->addSearchView();
-//    this->addWebInspector(view->webInspector());
     view->setWebViewWrapper(this);
 }
-//void WebViewWrapper::addWebInspector(QWebInspector *inspector)
-//{
-//    this->o_webInspector = inspector;
-//    this->splitter->insertWidget(INSPECTOR_VIEW_INDEX, inspector);
-//}
 
 void WebViewWrapper::addSearchView()
 {
@@ -100,8 +94,3 @@ HeriotWebView* WebViewWrapper::webView() const
 {
     return this->o_webView;
 }
-
-//QWebInspector* WebViewWrapper::webInspector() const
-//{
-//    return this->o_webInspector;
-//}
